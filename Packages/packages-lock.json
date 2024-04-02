@@ -1,5 +1,24 @@
 {
   "dependencies": {
+    "com.hammerelf.tools.utilities": {
+      "version": "https://github.com/hammerelf/Tools-Utilities.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.textmeshpro": "3.0.6",
+        "com.unity.cinemachine": "2.8.9"
+      },
+      "hash": "a8d33b59b75024373a8a9e829954037cc380e429"
+    },
+    "com.unity.cinemachine": {
+      "version": "2.9.5",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.test-framework": "1.1.31"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.collab-proxy": {
       "version": "2.3.1",
       "depth": 0,
