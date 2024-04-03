@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/_DessertDuel/Scenes/L0_Splash.unity
+    guid: 4f724409e7b47ce48afdbf68593964a5
+  - enabled: 1
+    path: Assets/_DessertDuel/Scenes/L1_MainMenu.unity
+    guid: 6c911c23a32286c4c8946e1e52a733f8
+  - enabled: 1
+    path: Assets/_DessertDuel/Scenes/L3_Store.unity
+    guid: e072cc84783fba54e8e4a98a81673530
   m_configObjects: {}
