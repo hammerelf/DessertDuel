@@ -10,10 +10,20 @@ namespace HammerElf.Games.DessertDuel
         private float delayTime;
         [SerializeField]
         private int indexToLoad;
-        [SerializeField]
+        [Space, Space, SerializeField]
         private bool isAdditive;
+        [SerializeField]
+        private bool isOnlyCall;
 
         private void Start()
+        {
+            if (!isOnlyCall)
+            {
+                StartCoroutine(LoadDelay(delayTime));
+            }
+        }
+
+        public void CallLoad()
         {
             StartCoroutine(LoadDelay(delayTime));
         }
