@@ -1,0 +1,16 @@
+{
+    "name": "DessertDuel",
+    "rootNamespace": "HammerElf.Games.DessertDuel",
+    "references": [
+        "GUID:0ef21f30d6690e942a878772b81445a7"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
