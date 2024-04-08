@@ -5,8 +5,8 @@ using UnityEngine;
 
 namespace HammerElf.Games.DessertDuel
 {
-    public class GameManager : Singleton<GameManager>
+    public class StoreController : Singleton<StoreController>
     {
-        
+        public Canvas mainCanvas;
     }
 }
