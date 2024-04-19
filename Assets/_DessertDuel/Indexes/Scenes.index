@@ -1,0 +1,20 @@
+{
+    "name": "",
+    "type": "scene",
+    "roots": [
+        "Assets/_DessertDuel/Scenes"
+    ],
+    "includes": [
+        "Assets/_DessertDuel/Scenes/",
+        ".unity"
+    ],
+    "excludes": [],
+    "options": {
+        "disabled": false,
+        "types": true,
+        "properties": false,
+        "extended": true,
+        "dependencies": false
+    },
+    "baseScore": 155
+}

@@ -1,0 +1,20 @@
+{
+    "name": "",
+    "type": "prefab",
+    "roots": [
+        "Assets/_DessertDuel/Prefabs"
+    ],
+    "includes": [
+        "Assets/_DessertDuel/Prefabs/",
+        ".prefab"
+    ],
+    "excludes": [],
+    "options": {
+        "disabled": false,
+        "types": true,
+        "properties": true,
+        "extended": true,
+        "dependencies": false
+    },
+    "baseScore": 150
+}
