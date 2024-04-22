@@ -158,7 +158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 196, y: -0.4057312}
+  m_AnchoredPosition: {x: 196, y: -0.40570068}
   m_SizeDelta: {x: -905.1612, y: -78.1837}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8082061
@@ -174,6 +174,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDraggable: {fileID: 0}
+  isDefense: 0
+  isShop: 0
 --- !u!114 &8082062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,7 +264,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54d6ca0035558dc49932d386dba649ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  assignedDraggable: {fileID: 0}
+  assignedDraggable: {fileID: 401692188}
+  isDefense: 1
+  isShop: 1
 --- !u!114 &10518421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,7 +317,7 @@ GameObject:
   - component: {fileID: 35925868}
   - component: {fileID: 35925867}
   m_Layer: 5
-  m_Name: LossesValue
+  m_Name: LivesValue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -485,7 +489,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54d6ca0035558dc49932d386dba649ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  assignedDraggable: {fileID: 0}
+  assignedDraggable: {fileID: 880379818}
+  isDefense: 1
+  isShop: 0
 --- !u!114 &52748693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -614,6 +620,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDraggable: {fileID: 0}
+  isDefense: 1
+  isShop: 0
 --- !u!114 &91193102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -837,6 +845,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDraggable: {fileID: 0}
+  isDefense: 0
+  isShop: 1
 --- !u!114 &174114198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1080,6 +1090,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDraggable: {fileID: 0}
+  isDefense: 0
+  isShop: 1
 --- !u!114 &278310799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1169,6 +1181,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDraggable: {fileID: 0}
+  isDefense: 0
+  isShop: 1
 --- !u!114 &311617714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1392,6 +1406,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDraggable: {fileID: 0}
+  isDefense: 0
+  isShop: 0
 --- !u!114 &317159961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1481,6 +1497,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDraggable: {fileID: 0}
+  isDefense: 1
+  isShop: 0
 --- !u!114 &329410314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1554,7 +1572,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.4057312}
+  m_AnchoredPosition: {x: 0, y: -0.40570068}
   m_SizeDelta: {x: -905.1612, y: -78.1837}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &347736991
@@ -1570,6 +1588,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDraggable: {fileID: 0}
+  isDefense: 0
+  isShop: 0
 --- !u!114 &347736992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1690,6 +1710,117 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 377550357}
+  m_CullTransparentMesh: 1
+--- !u!1 &401692186
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 401692187}
+  - component: {fileID: 401692191}
+  - component: {fileID: 401692190}
+  - component: {fileID: 401692189}
+  - component: {fileID: 401692188}
+  m_Layer: 5
+  m_Name: StoreStar
+  m_TagString: Draggable
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &401692187
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 401692186}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1624699488}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -851.6, y: -310.9}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &401692188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 401692186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 427c3e3db8beab2488cca291ca021920, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 1
+  itemName: six-sided-defense
+  cost: 3
+  power: 6
+  description: Has six points.
+  state: 0
+  health: 6
+  damage: 6
+  attackRate: 6
+--- !u!114 &401692189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 401692186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2de9580789ac89648b01dc88c923ad1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startDragReceiver: {fileID: 0}
+--- !u!114 &401692190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 401692186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0.16061544, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 3000dbce516784c43bdfec49f133dcb9, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &401692191
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 401692186}
   m_CullTransparentMesh: 1
 --- !u!1 &427017620
 GameObject:
@@ -1876,6 +2007,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDraggable: {fileID: 0}
+  isDefense: 0
+  isShop: 0
 --- !u!114 &427413036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2099,6 +2232,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDraggable: {fileID: 0}
+  isDefense: 1
+  isShop: 1
 --- !u!114 &482446070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2188,6 +2323,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDraggable: {fileID: 0}
+  isDefense: 0
+  isShop: 1
 --- !u!114 &499452484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2277,6 +2414,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDraggable: {fileID: 0}
+  isDefense: 0
+  isShop: 1
 --- !u!114 &506907785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2367,6 +2506,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDraggable: {fileID: 0}
+  isDefense: 0
+  isShop: 0
 --- !u!114 &614757436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2793,6 +2934,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDraggable: {fileID: 0}
+  isDefense: 1
+  isShop: 0
 --- !u!114 &664387080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3150,6 +3293,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDraggable: {fileID: 0}
+  isDefense: 1
+  isShop: 1
 --- !u!114 &719902411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3239,6 +3384,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDraggable: {fileID: 0}
+  isDefense: 1
+  isShop: 1
 --- !u!114 &747272384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3328,6 +3475,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDraggable: {fileID: 0}
+  isDefense: 1
+  isShop: 1
 --- !u!114 &749083509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3820,6 +3969,7 @@ GameObject:
   - component: {fileID: 880379817}
   - component: {fileID: 880379816}
   - component: {fileID: 880379815}
+  - component: {fileID: 880379818}
   m_Layer: 5
   m_Name: StarItem
   m_TagString: Draggable
@@ -3843,7 +3993,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -171.78204, y: -196.07965}
+  m_AnchoredPosition: {x: -851.6, y: -157.4}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &880379815
@@ -3897,6 +4047,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 880379813}
   m_CullTransparentMesh: 1
+--- !u!114 &880379818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 880379813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 427c3e3db8beab2488cca291ca021920, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 1
+  itemName: six-sided-defense
+  cost: 3
+  power: 6
+  description: Has six points.
+  state: 0
+  health: 6
+  damage: 6
+  attackRate: 6
 --- !u!1 &902538594
 GameObject:
   m_ObjectHideFlags: 0
@@ -4425,6 +4596,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDraggable: {fileID: 0}
+  isDefense: 0
+  isShop: 1
 --- !u!114 &985794753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4463,6 +4636,143 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 985794750}
   m_CullTransparentMesh: 1
+--- !u!1 &1052550275
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1052550277}
+  - component: {fileID: 1052550276}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1052550276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1052550275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37d8c4835969cca49a4fee6402ba10fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: currentPlayerState
+      Entry: 7
+      Data: 0|HammerElf.Games.DessertDuel.PlayerState, DessertDuel
+    - Name: money
+      Entry: 3
+      Data: 0
+    - Name: wins
+      Entry: 3
+      Data: 0
+    - Name: lives
+      Entry: 3
+      Data: 5
+    - Name: currentRound
+      Entry: 3
+      Data: 0
+    - Name: placementLanes
+      Entry: 7
+      Data: 1|System.Collections.Generic.List`1[[HammerElf.Games.DessertDuel.Lane,
+        DessertDuel]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: offensePlaceables
+      Entry: 7
+      Data: 2|System.Collections.Generic.List`1[[HammerElf.Games.DessertDuel.OffensePlaceable,
+        DessertDuel]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: defensePlaceables
+      Entry: 7
+      Data: 3|System.Collections.Generic.List`1[[HammerElf.Games.DessertDuel.DefensePlaceable,
+        DessertDuel]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: offenseStore
+      Entry: 7
+      Data: 4|System.Collections.Generic.List`1[[HammerElf.Games.DessertDuel.OffensePlaceable,
+        DessertDuel]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: defenseStore
+      Entry: 7
+      Data: 5|System.Collections.Generic.List`1[[HammerElf.Games.DessertDuel.DefensePlaceable,
+        DessertDuel]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  <UseDontDestroyOnLoad>k__BackingField: 1
+--- !u!4 &1052550277
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1052550275}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 932.3824, y: 640.21783, z: 5.698543}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1115105748
 GameObject:
   m_ObjectHideFlags: 0
@@ -4648,6 +4958,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDraggable: {fileID: 0}
+  isDefense: 0
+  isShop: 0
 --- !u!114 &1118912593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4721,7 +5033,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 196, y: -0.4057312}
+  m_AnchoredPosition: {x: 196, y: -0.40570068}
   m_SizeDelta: {x: -905.1612, y: -78.1837}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1130728800
@@ -4737,6 +5049,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDraggable: {fileID: 0}
+  isDefense: 0
+  isShop: 0
 --- !u!114 &1130728801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4826,6 +5140,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDraggable: {fileID: 0}
+  isDefense: 1
+  isShop: 1
 --- !u!114 &1143883299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5303,6 +5619,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDraggable: {fileID: 0}
+  isDefense: 0
+  isShop: 0
 --- !u!114 &1248385079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6108,6 +6426,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDraggable: {fileID: 0}
+  isDefense: 0
+  isShop: 0
 --- !u!114 &1318357203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6181,7 +6501,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.4057312}
+  m_AnchoredPosition: {x: 0, y: -0.40570068}
   m_SizeDelta: {x: -905.1612, y: -78.1837}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1378555466
@@ -6197,6 +6517,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDraggable: {fileID: 0}
+  isDefense: 0
+  isShop: 0
 --- !u!114 &1378555467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6247,7 +6569,7 @@ GameObject:
   - component: {fileID: 1391143793}
   - component: {fileID: 1391143792}
   m_Layer: 5
-  m_Name: LossesLabel
+  m_Name: LivesLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6292,7 +6614,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Losses:'
+  m_text: 'Lives:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6554,6 +6876,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDraggable: {fileID: 0}
+  isDefense: 0
+  isShop: 1
 --- !u!114 &1507496080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6725,6 +7049,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDraggable: {fileID: 0}
+  isDefense: 0
+  isShop: 1
 --- !u!114 &1535984871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6814,6 +7140,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDraggable: {fileID: 0}
+  isDefense: 0
+  isShop: 1
 --- !u!114 &1552469132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6903,6 +7231,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDraggable: {fileID: 0}
+  isDefense: 1
+  isShop: 0
 --- !u!114 &1585619842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6976,7 +7306,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 196, y: -0.4057312}
+  m_AnchoredPosition: {x: 196, y: -0.40570068}
   m_SizeDelta: {x: -905.1612, y: -78.1837}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1594241258
@@ -6992,6 +7322,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDraggable: {fileID: 0}
+  isDefense: 0
+  isShop: 0
 --- !u!114 &1594241259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7059,6 +7391,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 880379814}
+  - {fileID: 401692187}
   m_Father: {fileID: 1636032380}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -7362,6 +7695,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDraggable: {fileID: 0}
+  isDefense: 0
+  isShop: 0
 --- !u!114 &1667758099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7744,7 +8079,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.16061544, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -8033,6 +8368,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDraggable: {fileID: 0}
+  isDefense: 0
+  isShop: 1
 --- !u!114 &1829964187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8256,6 +8593,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDraggable: {fileID: 0}
+  isDefense: 0
+  isShop: 0
 --- !u!114 &1864885309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8534,6 +8873,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDraggable: {fileID: 0}
+  isDefense: 0
+  isShop: 1
 --- !u!114 &1897935062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8717,6 +9058,7 @@ GameObject:
   - component: {fileID: 2032907344}
   - component: {fileID: 2032907346}
   - component: {fileID: 2032907345}
+  - component: {fileID: 2032907347}
   m_Layer: 5
   m_Name: RoundInfoPanel
   m_TagString: Untagged
@@ -8790,6 +9132,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2032907343}
   m_CullTransparentMesh: 1
+--- !u!114 &2032907347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2032907343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f41b8d526ec3fb47bf3ae0269d1b621, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moneyText: {fileID: 870269750}
+  winsText: {fileID: 690590064}
+  livesText: {fileID: 35925867}
+  roundText: {fileID: 1115105750}
 --- !u!1 &2048147415
 GameObject:
   m_ObjectHideFlags: 0
@@ -8825,7 +9183,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.4057312}
+  m_AnchoredPosition: {x: 0, y: -0.40570068}
   m_SizeDelta: {x: -905.1612, y: -78.1837}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2048147417
@@ -8841,6 +9199,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDraggable: {fileID: 0}
+  isDefense: 0
+  isShop: 0
 --- !u!114 &2048147418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9198,6 +9558,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDraggable: {fileID: 0}
+  isDefense: 0
+  isShop: 0
 --- !u!114 &2056185296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9287,6 +9649,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDraggable: {fileID: 0}
+  isDefense: 0
+  isShop: 0
 --- !u!114 &2126112412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9376,6 +9740,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDraggable: {fileID: 0}
+  isDefense: 1
+  isShop: 0
 --- !u!114 &2140184750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9465,6 +9831,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assignedDraggable: {fileID: 0}
+  isDefense: 0
+  isShop: 1
 --- !u!114 &2143965841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9512,3 +9880,4 @@ SceneRoots:
   - {fileID: 1636032380}
   - {fileID: 1871428459}
   - {fileID: 1286285822}
+  - {fileID: 1052550277}
