@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "com.hammerelf.tools.utilities": "https://github.com/hammerelf/Tools-Utilities.git",
+    "com.handzlikchris.fastscriptreload": "https://github.com/handzlikchris/FastScriptReload.git?path=Assets",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.collab-proxy": "2.3.1",
     "com.unity.feature.development": "1.0.1",
