@@ -1,5 +1,6 @@
 //Created by: Ryan King
 
+using HammerElf.Tools.Utilities;
 using UnityEngine;
 
 namespace HammerElf.Games.DessertDuel
@@ -9,5 +10,11 @@ namespace HammerElf.Games.DessertDuel
         public Placeable assignedDraggable;
         public bool isDefense;
         public bool isShop;
+
+        public void PositionPlaceable()
+        {
+            if (assignedDraggable == null) ConsoleLog.Log("Assigned draggable null for: " + gameObject.name);
+            assignedDraggable.transform.position = transform.position;
+        }
     }
 }

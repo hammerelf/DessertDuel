@@ -264,7 +264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54d6ca0035558dc49932d386dba649ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  assignedDraggable: {fileID: 401692188}
+  assignedDraggable: {fileID: 0}
   isDefense: 1
   isShop: 1
 --- !u!114 &10518421
@@ -1711,117 +1711,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 377550357}
   m_CullTransparentMesh: 1
---- !u!1 &401692186
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 401692187}
-  - component: {fileID: 401692191}
-  - component: {fileID: 401692190}
-  - component: {fileID: 401692189}
-  - component: {fileID: 401692188}
-  m_Layer: 5
-  m_Name: StoreStar
-  m_TagString: Draggable
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &401692187
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 401692186}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1624699488}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -851.6, y: -310.9}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &401692188
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 401692186}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 427c3e3db8beab2488cca291ca021920, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 1
-  itemName: six-sided-defense
-  cost: 3
-  power: 6
-  description: Has six points.
-  state: 0
-  health: 6
-  damage: 6
-  attackRate: 6
---- !u!114 &401692189
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 401692186}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2de9580789ac89648b01dc88c923ad1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startDragReceiver: {fileID: 0}
---- !u!114 &401692190
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 401692186}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.16061544, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3000dbce516784c43bdfec49f133dcb9, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &401692191
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 401692186}
-  m_CullTransparentMesh: 1
 --- !u!1 &427017620
 GameObject:
   m_ObjectHideFlags: 0
@@ -2454,6 +2343,58 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 506907782}
   m_CullTransparentMesh: 1
+--- !u!1 &511687651
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 511687652}
+  - component: {fileID: 511687653}
+  m_Layer: 5
+  m_Name: StoreDraggables
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &511687652
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511687651}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1636032380}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &511687653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511687651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fc219dcbba90e84b86e2ecf840e0266, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: -7056137702951936110, guid: 0000000000000000d000000000000000, type: 0}
+  position: 0
+  direction: 0
+  tooltip: 
 --- !u!1 &614757433
 GameObject:
   m_ObjectHideFlags: 0
@@ -2762,7 +2703,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 624795085}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1286285823}
+        m_TargetAssemblyTypeName: HammerElf.Games.DessertDuel.StoreController, DessertDuel
+        m_MethodName: LoadStore
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &624795085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4646,6 +4599,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1052550277}
   - component: {fileID: 1052550276}
+  - component: {fileID: 1052550278}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -4773,6 +4727,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1052550278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1052550275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fc219dcbba90e84b86e2ecf840e0266, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 8872333681490167307, guid: 0000000000000000d000000000000000, type: 0}
+  position: 0
+  direction: 0
+  tooltip: 
 --- !u!1 &1115105748
 GameObject:
   m_ObjectHideFlags: 0
@@ -6071,6 +6041,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1286285822}
   - component: {fileID: 1286285823}
+  - component: {fileID: 1286285824}
   m_Layer: 0
   m_Name: StoreController
   m_TagString: Untagged
@@ -6107,6 +6078,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <UseDontDestroyOnLoad>k__BackingField: 0
   mainCanvas: {fileID: 1636032379}
+  playerDraggableHolder: {fileID: 1624699488}
+  storeDraggableHolder: {fileID: 511687652}
+  defenseOptions:
+  - {fileID: 8601609188985968985, guid: 312365a85dc981d47abce59aba43fa1b, type: 3}
+  - {fileID: 8601609188985968985, guid: d282b9ea5cde0f44b8af17f86f847e87, type: 3}
+  - {fileID: 8601609188985968985, guid: 7f0fd9222a709e1449ba3e9728156411, type: 3}
+  - {fileID: 8601609188985968985, guid: 3205e1f35808c414e978b0fafc635176, type: 3}
+  offenseOptions:
+  - {fileID: 8601609188985968985, guid: 2b641a07e5d8c3e44b128bc6ce623108, type: 3}
+  - {fileID: 8601609188985968985, guid: 30df141345dfdcb449e1523a4d11f72d, type: 3}
+  - {fileID: 8601609188985968985, guid: 6240698e0785b714087fc2736dc629cb, type: 3}
+  - {fileID: 8601609188985968985, guid: 0b67528bda23f1e47a7fabe535d53268, type: 3}
+  - {fileID: 8601609188985968985, guid: 5670e30ac79294b45a29c81722377e5f, type: 3}
+  - {fileID: 8601609188985968985, guid: dd0a2b459ae67414c9dd086050abd93f, type: 3}
+  defenseStoreSlots:
+  - {fileID: 10518420}
+  - {fileID: 482446069}
+  - {fileID: 719902410}
+  - {fileID: 747272383}
+  - {fileID: 749083508}
+  - {fileID: 1143883298}
+  offenseStoreSlots:
+  - {fileID: 2143965840}
+  - {fileID: 174114197}
+  - {fileID: 278310798}
+  - {fileID: 499452483}
+  - {fileID: 1829964186}
+  - {fileID: 1552469131}
+  - {fileID: 1507496079}
+  - {fileID: 1897935061}
+  - {fileID: 1535984870}
+  - {fileID: 311617713}
+  - {fileID: 506907784}
+  - {fileID: 985794752}
+--- !u!114 &1286285824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1286285821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fc219dcbba90e84b86e2ecf840e0266, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 2800000, guid: 8c49106dae4a4234482071bfdd55793d, type: 3}
+  position: 0
+  direction: 0
+  tooltip: 
 --- !u!1 &1289282735
 GameObject:
   m_ObjectHideFlags: 0
@@ -7371,8 +7392,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1624699488}
+  - component: {fileID: 1624699489}
   m_Layer: 5
-  m_Name: Draggables
+  m_Name: PlayerDraggables
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7391,7 +7413,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 880379814}
-  - {fileID: 401692187}
   m_Father: {fileID: 1636032380}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -7399,6 +7420,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1624699489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1624699487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fc219dcbba90e84b86e2ecf840e0266, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: -7056137702951936110, guid: 0000000000000000d000000000000000, type: 0}
+  position: 0
+  direction: 0
+  tooltip: 
 --- !u!1 &1636032376
 GameObject:
   m_ObjectHideFlags: 0
@@ -7503,6 +7540,7 @@ RectTransform:
   - {fileID: 812620668}
   - {fileID: 906705399}
   - {fileID: 1624699488}
+  - {fileID: 511687652}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
