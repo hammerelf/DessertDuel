@@ -8,6 +8,7 @@ namespace HammerElf.Games.DessertDuel
     public class DragReceiver : MonoBehaviour
     {
         public Placeable assignedDraggable;
+        public bool isActive;
         public bool isDefense;
         public bool isShop;
 
