@@ -9,9 +9,8 @@ namespace HammerElf.Games.DessertDuel
     public class StoreController : Singleton<StoreController>
     {
         public Canvas mainCanvas;
-        public Transform playerDraggableHolder;
         [SerializeField]
-        private Transform storeDraggableHolder;
+        private Transform draggableHolder;
         [SerializeField]
         private List<GameObject> defenseOptions;
         [SerializeField]
@@ -23,32 +22,41 @@ namespace HammerElf.Games.DessertDuel
 
         public void LoadStore()
         {
-            if (storeDraggableHolder.childCount > 0)
+            if (draggableHolder.childCount > 0)
             {
-                for (int i = 0; i < storeDraggableHolder.childCount; i++)
+                for (int i = 0; i < draggableHolder.childCount; i++)
                 {
-                    Destroy(storeDraggableHolder.GetChild(i).gameObject);
+                    if(draggableHolder.GetChild(i).GetComponent<Placeable>().state.Equals(PlaceableState.SHOP))
+                    {
+                        Destroy(draggableHolder.GetChild(i).gameObject);
+                    }
                 }
             }
             foreach(DragReceiver storeSlot in defenseStoreSlots)
             {
                 if(defenseOptions != null && defenseOptions.Count > 0)
                 {
-                    GameObject go = Instantiate(defenseOptions[Random.Range(0, defenseOptions.Count)], storeDraggableHolder);
-                    storeSlot.assignedDraggable = go.GetComponent<Placeable>();
-                    if (storeSlot.assignedDraggable == null) ConsoleLog.Log("Assigned draggable is null. Slot name: " + storeSlot.gameObject.name);
-                    storeSlot.PositionPlaceable();
+                    GameObject go = Instantiate(defenseOptions[Random.Range(0, defenseOptions.Count)], draggableHolder);
+                    SetUpStoreItem(storeSlot, go);
                 }
             }
             foreach(DragReceiver storeSlot in offenseStoreSlots)
             {
                 if(offenseOptions != null && offenseOptions.Count > 0)
                 {
-                    GameObject go = Instantiate(offenseOptions[Random.Range(0, offenseOptions.Count)], storeDraggableHolder);
-                    storeSlot.assignedDraggable = go.GetComponent<Placeable>();
-                    storeSlot.PositionPlaceable();
+                    GameObject go = Instantiate(offenseOptions[Random.Range(0, offenseOptions.Count)], draggableHolder);
+                    SetUpStoreItem(storeSlot, go);
                 }
             }
+        }
+
+        private void SetUpStoreItem(DragReceiver storeReceiver, GameObject storeItemObject)
+        {
+            Placeable placeable = storeItemObject.GetComponent<Placeable>();
+            placeable.state = PlaceableState.SHOP;
+            storeReceiver.assignedDraggable = placeable;
+            if (storeReceiver.assignedDraggable == null) ConsoleLog.Log("Assigned draggable is null. Slot name: " + storeReceiver.gameObject.name);
+            storeReceiver.PositionPlaceable();
         }
     }
 }

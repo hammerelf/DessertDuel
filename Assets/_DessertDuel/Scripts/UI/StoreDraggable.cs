@@ -14,6 +14,7 @@ namespace HammerElf.Games.DessertDuel
         private Vector3 startDragPosition;
         private GraphicRaycaster canvasRaycaster;
         private bool isValidationPassed = true;
+        private Placeable thisPlaceable;
         [Space, Space]
         [SerializeField, ReadOnly, FoldoutGroup("VariableInfo", expanded: false)]
         private string dragValidationMessage, dropValidationMessage, purchaseValidationMessage;
@@ -24,6 +25,7 @@ namespace HammerElf.Games.DessertDuel
         {
             canvasRaycaster = StoreController.Instance.mainCanvas.GetComponent<GraphicRaycaster>();
             startDragPosition = transform.position;
+            thisPlaceable = GetComponent<Placeable>();
         }
 
         public void OnBeginDrag(PointerEventData eventData)
@@ -32,19 +34,20 @@ namespace HammerElf.Games.DessertDuel
             canvasRaycaster.Raycast(eventData, raycastResults);
             bool draggableClicked = false;
             DragReceiver tempReceiver = null;
+            
             foreach (RaycastResult result in raycastResults)
             {
                 if (result.gameObject.CompareTag("Draggable"))
                 {
                     startDragPosition = transform.position;
                     draggableClicked = true;
-                    continue;
                 }
                 if (result.gameObject.CompareTag("DragReceiver"))
                 {
                     tempReceiver = result.gameObject.GetComponent<DragReceiver>();
                 }
             }
+            
             //Short-circuit drag event if validation fails.
             if (!DragStartValidation(tempReceiver, out dragValidationMessage))
             {
@@ -55,13 +58,15 @@ namespace HammerElf.Games.DessertDuel
                 return;
             }
             ConsoleLog.Log(dragValidationMessage); //Need to show failed validation message to player here.
+
+            //TODO: Check if this if is necessary. 
             if (draggableClicked && tempReceiver != null)
             {
                 startDragReceiver = tempReceiver;
+                transform.SetAsLastSibling();
             }
         }
 
-        //TODO: Need to make sure current item being dragged is on top of other items until dropped.
         public void OnDrag(PointerEventData eventData)
         {
             if (startDragReceiver != null)
@@ -82,15 +87,16 @@ namespace HammerElf.Games.DessertDuel
                     {
                         if (result.gameObject.CompareTag("DragReceiver"))
                         {
-                            DragReceiver dragRec = result.gameObject.GetComponent<DragReceiver>();
+                            DragReceiver dragReceiverDestination = result.gameObject.GetComponent<DragReceiver>();
 
-                            if (dragRec != null && dragRec.assignedDraggable == null && DragEndValidation(dragRec, out dropValidationMessage))
+                            if (dragReceiverDestination != null && dragReceiverDestination.assignedDraggable == null && DragEndValidation(dragReceiverDestination, out dropValidationMessage))
                             {
                                 if (TryPurchase(startDragReceiver, out purchaseValidationMessage))
                                 {
+                                    thisPlaceable.state = dragReceiverDestination.slotState;
                                     startDragReceiver.assignedDraggable = null;
                                     startDragReceiver = null;
-                                    dragRec.assignedDraggable = GetComponent<Placeable>();
+                                    dragReceiverDestination.assignedDraggable = thisPlaceable;
                                     transform.position = result.gameObject.transform.position;
                                     isValidationPassed = true;
                                     return;
@@ -106,7 +112,8 @@ namespace HammerElf.Games.DessertDuel
                 transform.position = startDragPosition;
                 if (startDragReceiver != null)
                 {
-                    startDragReceiver.assignedDraggable = GetComponent<Placeable>();
+                    thisPlaceable.state = startDragReceiver.slotState;
+                    startDragReceiver.assignedDraggable = thisPlaceable;
                     startDragReceiver = null;
                 }
             }
@@ -124,7 +131,7 @@ namespace HammerElf.Games.DessertDuel
             }
 
             bool poorCheck = true;
-            if (startReceiver.isShop && GameManager.Instance.currentPlayerState.money <= 0)
+            if (startReceiver.slotState.Equals(PlaceableState.SHOP) && GameManager.Instance.currentPlayerState.money <= 0)
             {
                 validationMessage += "Money is 0.\n";
                 poorCheck = false;
@@ -154,7 +161,7 @@ namespace HammerElf.Games.DessertDuel
             }
 
             bool shopCheck = true;
-            if (dropReceiver.isShop)
+            if (dropReceiver.slotState.Equals(PlaceableState.SHOP))
             {
                 validationMessage += "Destination is shop.\n";
                 shopCheck = false;
@@ -189,7 +196,7 @@ namespace HammerElf.Games.DessertDuel
         private bool TryPurchase(DragReceiver startReciever, out string validationMessage)
         {
             validationMessage = "";
-            if (!startReciever.isShop) // Not moving from a shop reciever so don't need to check.
+            if (!startReciever.slotState.Equals(PlaceableState.SHOP)) // Not moving from a shop reciever so don't need to check.
             {
                 validationMessage = "Passed: Not a store item.";
                 return true;
