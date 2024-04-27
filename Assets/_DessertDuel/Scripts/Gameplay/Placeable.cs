@@ -1,6 +1,7 @@
 //Created by: Ryan King
 
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace HammerElf.Games.DessertDuel
 {
@@ -12,5 +13,6 @@ namespace HammerElf.Games.DessertDuel
         public int power;
         public string description;
         public PlaceableState state;
+        public Image itemImage;
     }
 }

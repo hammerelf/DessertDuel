@@ -12,7 +12,6 @@ namespace HammerElf.Games.DessertDuel
     public class StoreDraggable : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
     {
         private Vector3 startDragPosition;
-        private GraphicRaycaster canvasRaycaster;
         private bool isValidationPassed = true;
         private Placeable thisPlaceable;
         [Space, Space]
@@ -23,7 +22,6 @@ namespace HammerElf.Games.DessertDuel
 
         private void Awake()
         {
-            canvasRaycaster = StoreController.Instance.mainCanvas.GetComponent<GraphicRaycaster>();
             startDragPosition = transform.position;
             thisPlaceable = GetComponent<Placeable>();
         }
@@ -31,7 +29,7 @@ namespace HammerElf.Games.DessertDuel
         public void OnBeginDrag(PointerEventData eventData)
         {
             List<RaycastResult> raycastResults = new List<RaycastResult>();
-            canvasRaycaster.Raycast(eventData, raycastResults);
+            StoreController.Instance.graphicRaycaster.Raycast(eventData, raycastResults);
             bool draggableClicked = false;
             DragReceiver tempReceiver = null;
             
@@ -82,7 +80,7 @@ namespace HammerElf.Games.DessertDuel
                 if (startDragReceiver != null)
                 {
                     List<RaycastResult> raycastResults = new List<RaycastResult>();
-                    canvasRaycaster.Raycast(eventData, raycastResults);
+                    StoreController.Instance.graphicRaycaster.Raycast(eventData, raycastResults);
                     foreach (RaycastResult result in raycastResults)
                     {
                         if (result.gameObject.CompareTag("DragReceiver"))

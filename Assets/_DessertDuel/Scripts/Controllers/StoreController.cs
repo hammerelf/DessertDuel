@@ -3,12 +3,14 @@
 using HammerElf.Tools.Utilities;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace HammerElf.Games.DessertDuel
 {
     public class StoreController : Singleton<StoreController>
     {
-        public Canvas mainCanvas;
+        public GraphicRaycaster graphicRaycaster;
+        public ItemInfoPanel itemInfoPanel;
         [SerializeField]
         private Transform draggableHolder;
         [SerializeField]
@@ -19,6 +21,11 @@ namespace HammerElf.Games.DessertDuel
         private List<DragReceiver> defenseStoreSlots;
         [SerializeField]
         private List<DragReceiver> offenseStoreSlots;
+
+        private void Start()
+        {
+            LoadStore();
+        }
 
         public void LoadStore()
         {
