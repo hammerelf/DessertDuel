@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -2079476140869113528}
   m_Layer: 5
   m_Name: AttackStarItem 5
-  m_TagString: Draggable
+  m_TagString: Placeable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

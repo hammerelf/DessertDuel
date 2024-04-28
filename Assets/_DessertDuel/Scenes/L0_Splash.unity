@@ -553,6 +553,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1292062663}
   - component: {fileID: 1292062662}
+  - component: {fileID: 1292062664}
   m_Layer: 0
   m_Name: SplashController
   m_TagString: Untagged
@@ -575,6 +576,7 @@ MonoBehaviour:
   delayTime: 2
   indexToLoad: 1
   isAdditive: 0
+  isOnlyCall: 0
 --- !u!4 &1292062663
 Transform:
   m_ObjectHideFlags: 0
@@ -590,6 +592,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1292062664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1292062661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d9f187c45b4f0b408ecbdd9d78a1a7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <UseDontDestroyOnLoad>k__BackingField: 1
 --- !u!1 &1444349942
 GameObject:
   m_ObjectHideFlags: 0

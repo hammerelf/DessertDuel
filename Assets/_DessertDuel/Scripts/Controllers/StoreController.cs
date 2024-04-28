@@ -2,6 +2,7 @@
 
 using HammerElf.Tools.Utilities;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,8 @@ namespace HammerElf.Games.DessertDuel
     {
         public GraphicRaycaster graphicRaycaster;
         public ItemInfoPanel itemInfoPanel;
+        public TextMeshProUGUI dragValidationOutput, dropValidationOutput, purchaseValidationOutput;
+
         [SerializeField]
         private Transform draggableHolder;
         [SerializeField]
@@ -21,6 +24,12 @@ namespace HammerElf.Games.DessertDuel
         private List<DragReceiver> defenseStoreSlots;
         [SerializeField]
         private List<DragReceiver> offenseStoreSlots;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            GameManager.Instance.storeController = this;
+        }
 
         private void Start()
         {

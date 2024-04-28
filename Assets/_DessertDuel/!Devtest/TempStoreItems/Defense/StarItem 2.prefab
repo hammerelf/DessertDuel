@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 9037871371737340055}
   m_Layer: 5
   m_Name: StarItem 2
-  m_TagString: Draggable
+  m_TagString: Placeable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

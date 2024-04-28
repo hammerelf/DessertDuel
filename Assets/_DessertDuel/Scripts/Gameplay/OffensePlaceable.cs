@@ -7,11 +7,11 @@ namespace HammerElf.Games.DessertDuel
 {
     public class OffensePlaceable : Placeable
     {
-        [BoxGroup("Offense Only")]
+        [TitleGroup("Offense Only")]
         public int moveSpeed;
-        [BoxGroup("Offense Only")]
+        [TitleGroup("Offense Only")]
         public int health;
-        [BoxGroup("Offense Only")]
+        [TitleGroup("Offense Only")]
         public int spawnRate;
     }
 }

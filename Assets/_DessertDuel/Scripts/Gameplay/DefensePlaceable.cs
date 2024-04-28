@@ -7,11 +7,11 @@ namespace HammerElf.Games.DessertDuel
 {
     public class DefensePlaceable : Placeable
     {
-        [BoxGroup("Defense Only")]
+        [TitleGroup("Defense Only")]
         public int health;
-        [BoxGroup("Defense Only")]
+        [TitleGroup("Defense Only")]
         public int damage;
-        [BoxGroup("Defense Only")]
+        [TitleGroup("Defense Only")]
         public int attackRate;
     }
 }

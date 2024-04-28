@@ -15,7 +15,7 @@ namespace HammerElf.Games.DessertDuel
             StoreController.Instance.graphicRaycaster.Raycast(eventData, raycastResults);
             foreach (RaycastResult result in raycastResults)
             {
-                if (result.gameObject.CompareTag("Draggable"))
+                if (result.gameObject.CompareTag("Placeable"))
                 {
                     StoreController.Instance.itemInfoPanel.SetValues(result.gameObject.GetComponent<Placeable>());
                     return;

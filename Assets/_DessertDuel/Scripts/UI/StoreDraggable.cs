@@ -1,11 +1,14 @@
 //Created by: Ryan King
 
+//TODO: Found another bug on top of the placeables assigned in two places. You can also double-click
+//      on a draggable, move it quickly, then let it go and it will place it anywhere. If it isn't on
+//      receivable then it is stuck there permanently.
+
 using HammerElf.Tools.Utilities;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 namespace HammerElf.Games.DessertDuel
 {
@@ -35,7 +38,7 @@ namespace HammerElf.Games.DessertDuel
             
             foreach (RaycastResult result in raycastResults)
             {
-                if (result.gameObject.CompareTag("Draggable"))
+                if (result.gameObject.CompareTag("Placeable"))
                 {
                     startDragPosition = transform.position;
                     draggableClicked = true;
@@ -49,13 +52,13 @@ namespace HammerElf.Games.DessertDuel
             //Short-circuit drag event if validation fails.
             if (!DragStartValidation(tempReceiver, out dragValidationMessage))
             {
-                ConsoleLog.Log(dragValidationMessage); //Need to show failed validation message to player here.
+                StoreController.Instance.dragValidationOutput.text = dragValidationMessage;
                 isValidationPassed = false;
                 eventData.pointerDrag = null;
                 OnEndDrag(eventData);
                 return;
             }
-            ConsoleLog.Log(dragValidationMessage); //Need to show failed validation message to player here.
+            StoreController.Instance.dragValidationOutput.text = dragValidationMessage;
 
             //TODO: Check if this if is necessary. 
             if (draggableClicked && tempReceiver != null)
@@ -93,15 +96,21 @@ namespace HammerElf.Games.DessertDuel
                                 {
                                     thisPlaceable.state = dragReceiverDestination.slotState;
                                     startDragReceiver.assignedDraggable = null;
+                                    //TODO: Current bad fix until I can actually figure out why my checks
+                                    //are failing and placeables can be assigned in two places at once.
+                                    foreach (DragReceiver dReceiver in GameObject.FindObjectsOfType<DragReceiver>())
+                                    {
+                                        dReceiver.assignedDraggable = null;
+                                    }
                                     startDragReceiver = null;
                                     dragReceiverDestination.assignedDraggable = thisPlaceable;
                                     transform.position = result.gameObject.transform.position;
                                     isValidationPassed = true;
                                     return;
                                 }
-                                ConsoleLog.Log(purchaseValidationMessage); //Need to show failed validation message to player here.
+                                StoreController.Instance.purchaseValidationOutput.text = purchaseValidationMessage;
                             }
-                            ConsoleLog.Log(dropValidationMessage); //Need to show failed validation message to player here.
+                            StoreController.Instance.dropValidationOutput.text = dropValidationMessage;
                         }
                     }
                 }
