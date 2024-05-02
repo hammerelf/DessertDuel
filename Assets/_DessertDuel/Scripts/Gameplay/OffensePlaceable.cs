@@ -13,5 +13,13 @@ namespace HammerElf.Games.DessertDuel
         public int health;
         [TitleGroup("Offense Only")]
         public int spawnRate;
+
+        public override string ToString()
+        {
+            return base.ToString() + 
+                   "\nMove speed: " + moveSpeed +
+                   "\nHealth: " + health +
+                   "\nSpawn rate: " + spawnRate;
+        }
     }
 }

@@ -13,5 +13,13 @@ namespace HammerElf.Games.DessertDuel
         public int damage;
         [TitleGroup("Defense Only")]
         public int attackRate;
+
+        public override string ToString()
+        {
+            return base.ToString() +
+                   "\nHealth: " + health +
+                   "\nDamage: " + damage +
+                   "\nAttack Rate: " + attackRate;
+        }
     }
 }

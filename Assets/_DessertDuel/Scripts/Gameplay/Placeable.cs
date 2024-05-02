@@ -22,5 +22,15 @@ namespace HammerElf.Games.DessertDuel
         public PlaceableState state;
         [TitleGroup("Base")]
         public Image itemImage;
+
+        public override string ToString()
+        {
+            return "Placeable id: " + id +
+                   "\nItem name: " + itemName +
+                   "\nCost: " + cost +
+                   "\nPower: " + power +
+                   "\nDescription: " + description +
+                   "\nCurrent state: " + state.ToString();
+        }
     }
 }

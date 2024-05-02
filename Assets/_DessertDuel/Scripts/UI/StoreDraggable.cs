@@ -50,7 +50,7 @@ namespace HammerElf.Games.DessertDuel
             }
 
             //If start validation fails, startDragReceiver remains null which disables move and drop logic.
-            if(DragStartValidation(tempReceiver, out dragValidationMessage) && tempReceiver != null)
+            if(tempReceiver != null && DragStartValidation(tempReceiver, out dragValidationMessage))
             {
                 startDragReceiver = tempReceiver;
                 transform.SetAsLastSibling();
@@ -115,10 +115,11 @@ namespace HammerElf.Games.DessertDuel
         {
             validationMessage = "";
 
+            //This shouldn't be happening but if it does the logic should handle it without breaking.
             if (startReceiver == null)
             {
                 validationMessage = "Error: Start receiver null!";
-                ConsoleLog.LogError(validationMessage);
+                ConsoleLog.LogWarning(validationMessage);
                 return false;
             }
 
@@ -157,10 +158,11 @@ namespace HammerElf.Games.DessertDuel
         private bool DragEndValidation(DragReceiver dropReceiver, out string validationMessage)
         {
             validationMessage = "";
+            //This shouldn't be happening but if it does the logic should handle it without breaking.
             if (dropReceiver == null)
             {
                 validationMessage = "Drop receiver null!";
-                ConsoleLog.LogError(validationMessage);
+                ConsoleLog.LogWarning(validationMessage);
                 return false;
             }
 
@@ -202,22 +204,18 @@ namespace HammerElf.Games.DessertDuel
         private bool TryPurchase(DragReceiver startReceiver, out string validationMessage)
         {
             validationMessage = "";
-            if (startReceiver == null) ConsoleLog.Log("startReceiver null");
-            if (startReceiver.slotState == null) ConsoleLog.Log("SlotState null");
             if (!startReceiver.slotState.Equals(PlaceableState.SHOP)) // Not moving from a shop receiver so don't need to check.
             {
                 validationMessage = "Passed: Not a store item.";
                 return true;
             }
-            if (startReceiver == null) ConsoleLog.Log("receiver null");
-            if (startDragReceiver.assignedDraggable == null) ConsoleLog.Log("Assigned draggable null");
-            if (GameManager.Instance == null) ConsoleLog.Log("GameManager null");
-            if (GameManager.Instance.currentPlayerState == null) ConsoleLog.Log("Player state null");
             if (startReceiver.assignedDraggable.cost <= GameManager.Instance.currentPlayerState.money)
             {
                 validationMessage = "Passed: Making purchase.";
                 StoreController.Instance.purchaseValidationOutput.text = dragValidationMessage;
                 GameManager.Instance.currentPlayerState.money -= startReceiver.assignedDraggable.cost;
+                ConsoleLog.Log("Player purchased a " + startReceiver.assignedDraggable.name +
+                               "\n" + startReceiver.assignedDraggable.ToString());
                 return true;
             }
             else
