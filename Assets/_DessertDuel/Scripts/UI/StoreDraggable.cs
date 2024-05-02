@@ -1,9 +1,5 @@
 //Created by: Ryan King
 
-//TODO: Found another bug on top of the placeables assigned in two places. You can also double-click
-//      on a draggable, move it quickly, then let it go and it will place it anywhere. If it isn't on
-//      receivable then it is stuck there permanently.
-
 using HammerElf.Tools.Utilities;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
@@ -12,10 +8,10 @@ using UnityEngine.EventSystems;
 
 namespace HammerElf.Games.DessertDuel
 {
-    public class StoreDraggable : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
+    public class StoreDraggable : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         private Vector3 startDragPosition;
-        private bool isValidationPassed = true;
+        //private bool isDragValidationPassed = true;
         private Placeable thisPlaceable;
         [Space, Space]
         [SerializeField, ReadOnly, FoldoutGroup("VariableInfo", expanded: false)]
@@ -29,66 +25,53 @@ namespace HammerElf.Games.DessertDuel
             thisPlaceable = GetComponent<Placeable>();
         }
 
-        public void OnBeginDrag(PointerEventData eventData)
+        //Drag placeable if startDragReceiver is not null, which is set in OnPointerDown.
+        private void Update()
+        {
+            if (startDragReceiver != null)
+            {
+                transform.position = Input.mousePosition;
+            }
+        }
+
+        //If DragReceiver is clicked on and start drag logic passes, then set startDragReceiver.
+        public void OnPointerDown(PointerEventData eventData)
         {
             List<RaycastResult> raycastResults = new List<RaycastResult>();
             StoreController.Instance.graphicRaycaster.Raycast(eventData, raycastResults);
-            bool draggableClicked = false;
             DragReceiver tempReceiver = null;
-            
+
             foreach (RaycastResult result in raycastResults)
             {
-                if (result.gameObject.CompareTag("Placeable"))
-                {
-                    startDragPosition = transform.position;
-                    draggableClicked = true;
-                }
                 if (result.gameObject.CompareTag("DragReceiver"))
                 {
                     tempReceiver = result.gameObject.GetComponent<DragReceiver>();
                 }
             }
-            
-            //Short-circuit drag event if validation fails.
-            if (!DragStartValidation(tempReceiver, out dragValidationMessage))
-            {
-                StoreController.Instance.dragValidationOutput.text = dragValidationMessage;
-                isValidationPassed = false;
-                eventData.pointerDrag = null;
-                OnEndDrag(eventData);
-                return;
-            }
-            StoreController.Instance.dragValidationOutput.text = dragValidationMessage;
 
-            //TODO: Check if this if is necessary. 
-            if (draggableClicked && tempReceiver != null)
+            //If start validation fails, startDragReceiver remains null which disables move and drop logic.
+            if(DragStartValidation(tempReceiver, out dragValidationMessage) && tempReceiver != null)
             {
                 startDragReceiver = tempReceiver;
                 transform.SetAsLastSibling();
             }
         }
 
-        public void OnDrag(PointerEventData eventData)
+        //Handle placement validation, buying, and selling when placeable being dragged is dropped on a receiver.
+        public void OnPointerUp(PointerEventData eventData)
         {
-            if (startDragReceiver != null)
-            {
-                transform.position = new Vector3(eventData.position.x, eventData.position.y, 0);
-            }
-        }
-
-        public void OnEndDrag(PointerEventData eventData)
-        {
-            if (isValidationPassed) //Check if already failed validation on start drag.
+            List<RaycastResult> raycastResults = new List<RaycastResult>();
+            StoreController.Instance.graphicRaycaster.Raycast(eventData, raycastResults);
+            DragReceiver dragReceiverDestination;
+            foreach (RaycastResult result in raycastResults)
             {
                 if (startDragReceiver != null)
                 {
-                    List<RaycastResult> raycastResults = new List<RaycastResult>();
-                    StoreController.Instance.graphicRaycaster.Raycast(eventData, raycastResults);
-                    foreach (RaycastResult result in raycastResults)
+                    if (!result.gameObject.name.Equals("SellSlot"))
                     {
                         if (result.gameObject.CompareTag("DragReceiver"))
                         {
-                            DragReceiver dragReceiverDestination = result.gameObject.GetComponent<DragReceiver>();
+                            dragReceiverDestination = result.gameObject.GetComponent<DragReceiver>();
 
                             if (dragReceiverDestination != null && dragReceiverDestination.assignedDraggable == null && DragEndValidation(dragReceiverDestination, out dropValidationMessage))
                             {
@@ -96,44 +79,53 @@ namespace HammerElf.Games.DessertDuel
                                 {
                                     thisPlaceable.state = dragReceiverDestination.slotState;
                                     startDragReceiver.assignedDraggable = null;
-                                    //TODO: Current bad fix until I can actually figure out why my checks
-                                    //are failing and placeables can be assigned in two places at once.
-                                    foreach (DragReceiver dReceiver in GameObject.FindObjectsOfType<DragReceiver>())
-                                    {
-                                        dReceiver.assignedDraggable = null;
-                                    }
                                     startDragReceiver = null;
                                     dragReceiverDestination.assignedDraggable = thisPlaceable;
                                     transform.position = result.gameObject.transform.position;
-                                    isValidationPassed = true;
                                     return;
                                 }
-                                StoreController.Instance.purchaseValidationOutput.text = purchaseValidationMessage;
                             }
-                            StoreController.Instance.dropValidationOutput.text = dropValidationMessage;
+                        }
+                    }
+                    else
+                    {
+                        if (startDragReceiver.assignedDraggable.state != PlaceableState.SHOP ||
+                            startDragReceiver.assignedDraggable.state != PlaceableState.NONE)
+                        {
+                            GameManager.Instance.currentPlayerState.money += startDragReceiver.assignedDraggable.cost / 2;
+                            Destroy(gameObject);
+                            return;
                         }
                     }
                 }
-
-                //Drag failed so reset.
-                transform.position = startDragPosition;
-                if (startDragReceiver != null)
-                {
-                    thisPlaceable.state = startDragReceiver.slotState;
-                    startDragReceiver.assignedDraggable = thisPlaceable;
-                    startDragReceiver = null;
-                }
             }
-            isValidationPassed = true;
+
+            //Drag failed so reset.
+            if (startDragReceiver != null)
+            {
+                thisPlaceable.state = startDragReceiver.slotState;
+                startDragReceiver.PositionPlaceable();
+                startDragReceiver = null;
+            }
         }
 
+        //When placeable is picked up validate the following: 
+        //      -If starting at store, does the player have any money (may need to be removed for free items later).
         private bool DragStartValidation(DragReceiver startReceiver, out string validationMessage)
         {
             validationMessage = "";
+
             if (startReceiver == null)
             {
                 validationMessage = "Error: Start receiver null!";
                 ConsoleLog.LogError(validationMessage);
+                return false;
+            }
+
+            if (startReceiver.assignedDraggable == null)
+            {
+                validationMessage = "Empty receivable slot.";
+                StoreController.Instance.dragValidationOutput.text = dragValidationMessage;
                 return false;
             }
 
@@ -147,16 +139,21 @@ namespace HammerElf.Games.DessertDuel
             if(poorCheck) //Check each validation bool here.
             {
                 validationMessage = "Passed.";
+                StoreController.Instance.dragValidationOutput.text = dragValidationMessage;
                 return true;
             }
             else
             {
                 validationMessage.TrimEnd('\n');
                 validationMessage = "Failed: " + validationMessage;
+                StoreController.Instance.dragValidationOutput.text = dragValidationMessage;
                 return false;
             }
         }
 
+        //When placeable is dropped validate the following: 
+        //      -Not dropping into shop.
+        //      -Not dropping offense/defense into the wrong type of receiver.
         private bool DragEndValidation(DragReceiver dropReceiver, out string validationMessage)
         {
             validationMessage = "";
@@ -186,12 +183,14 @@ namespace HammerElf.Games.DessertDuel
             if (isOffenseDefense && shopCheck) //Check each validation bool here.
             {
                 validationMessage = "Passed.";
+                StoreController.Instance.dropValidationOutput.text = dragValidationMessage;
                 return true;
             }
             else
             {
                 validationMessage.TrimEnd('\n');
                 validationMessage = "Failed: " + validationMessage;
+                StoreController.Instance.dropValidationOutput.text = dragValidationMessage;
                 return false;
             }
         }
@@ -200,23 +199,33 @@ namespace HammerElf.Games.DessertDuel
         //check how much money the player has. If the player has enough money subtract that much money 
         //and return true. If the player doesn't have enough money return false and a purchase check 
         //failed message.
-        private bool TryPurchase(DragReceiver startReciever, out string validationMessage)
+        private bool TryPurchase(DragReceiver startReceiver, out string validationMessage)
         {
             validationMessage = "";
-            if (!startReciever.slotState.Equals(PlaceableState.SHOP)) // Not moving from a shop reciever so don't need to check.
+            if (startReceiver == null) ConsoleLog.Log("startReceiver null");
+            if (startReceiver.slotState == null) ConsoleLog.Log("SlotState null");
+            if (!startReceiver.slotState.Equals(PlaceableState.SHOP)) // Not moving from a shop receiver so don't need to check.
             {
                 validationMessage = "Passed: Not a store item.";
                 return true;
             }
-
-            if (startReciever.assignedDraggable.cost <= GameManager.Instance.currentPlayerState.money)
+            if (startReceiver == null) ConsoleLog.Log("receiver null");
+            if (startDragReceiver.assignedDraggable == null) ConsoleLog.Log("Assigned draggable null");
+            if (GameManager.Instance == null) ConsoleLog.Log("GameManager null");
+            if (GameManager.Instance.currentPlayerState == null) ConsoleLog.Log("Player state null");
+            if (startReceiver.assignedDraggable.cost <= GameManager.Instance.currentPlayerState.money)
             {
                 validationMessage = "Passed: Making purchase.";
-                GameManager.Instance.currentPlayerState.money -= startReciever.assignedDraggable.cost;
+                StoreController.Instance.purchaseValidationOutput.text = dragValidationMessage;
+                GameManager.Instance.currentPlayerState.money -= startReceiver.assignedDraggable.cost;
                 return true;
             }
-            validationMessage = "Failed: Not enough money.";
-            return false;
+            else
+            {
+                validationMessage = "Failed: Not enough money.";
+                StoreController.Instance.purchaseValidationOutput.text = dragValidationMessage;
+                return false;
+            }
         }
     }
 }
