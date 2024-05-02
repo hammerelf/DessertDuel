@@ -24,6 +24,8 @@ namespace HammerElf.Games.DessertDuel
         private List<DragReceiver> defenseStoreSlots;
         [SerializeField]
         private List<DragReceiver> offenseStoreSlots;
+        [SerializeField]
+        private int rerollCost = 1;
 
         protected override void Awake()
         {
@@ -73,6 +75,22 @@ namespace HammerElf.Games.DessertDuel
             storeReceiver.assignedDraggable = placeable;
             if (storeReceiver.assignedDraggable == null) ConsoleLog.Log("Assigned draggable is null. Slot name: " + storeReceiver.gameObject.name);
             storeReceiver.PositionPlaceable();
+        }
+
+        //If there is enough money to reroll then subtract rerollCost from money and call LoadStore.
+        //If not then play "Not enough money" feedback.
+        public void RerollStore()
+        {
+            if(GameManager.Instance.currentPlayerState.money >= rerollCost)
+            {
+                GameManager.Instance.currentPlayerState.money -= rerollCost;
+                LoadStore();
+            }
+            else
+            {
+                //Not enough money feedback will go here.
+                ConsoleLog.Log("Not enough money to reroll.");
+            }
         }
     }
 }
