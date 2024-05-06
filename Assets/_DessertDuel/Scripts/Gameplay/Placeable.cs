@@ -1,5 +1,7 @@
 //Created by: Ryan King
 
+//TODO: Change this into ScriptableObject.
+
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;

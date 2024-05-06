@@ -10,6 +10,7 @@ namespace HammerElf.Games.DessertDuel
         protected override void Awake()
         {
             base.Awake();
+            GameManager.Instance.splashController = this;
         }
     }
 }
