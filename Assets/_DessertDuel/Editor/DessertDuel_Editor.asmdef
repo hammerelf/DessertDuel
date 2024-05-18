@@ -1,7 +1,10 @@
 {
     "name": "DessertDuel_Editor",
-    "rootNamespace": "HammerElf.editor.DessertDuel",
-    "references": [],
+    "rootNamespace": "HammerElf.Editor.DessertDuel",
+    "references": [
+        "GUID:ae530e44155601349ba80dfd6fbb5197",
+        "GUID:0ef21f30d6690e942a878772b81445a7"
+    ],
     "includePlatforms": [
         "Editor"
     ],

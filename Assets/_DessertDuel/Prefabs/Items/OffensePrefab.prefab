@@ -9,13 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6917616108819314038}
-  - component: {fileID: -5725597153435352504}
+  - component: {fileID: 4436792878582544936}
   - component: {fileID: 3294265825821247965}
-  - component: {fileID: 1056680037703521133}
+  - component: {fileID: 6681332372978619925}
   - component: {fileID: 2670094782170178727}
   - component: {fileID: 6736010378012281123}
   m_Layer: 5
-  m_Name: AttackStarItem 3
+  m_Name: OffensePrefab
   m_TagString: Placeable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,7 +40,7 @@ RectTransform:
   m_AnchoredPosition: {x: -851.6, y: -157.4}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &-5725597153435352504
+--- !u!114 &4436792878582544936
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -52,17 +52,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 342fff1bdc8daee48952f98ad6d58967, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 14
-  itemName: Attack star 4
-  cost: 4
-  power: 4
-  description: At 4
+  id: -1
+  itemName: 
+  cost: 0
+  power: 0
+  description: 
   state: 0
   itemImage: {fileID: 6736010378012281123}
-  itemImagePath: 
-  health: 4
-  moveSpeed: 4
-  spawnRate: 4
+  itemImagePath: Assets/_DessertDuel/Art/Sprites/MissingNo.png
+  health: 0
+  moveSpeed: 0
+  spawnRate: 0
 --- !u!114 &3294265825821247965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,7 +79,7 @@ MonoBehaviour:
   dropValidationMessage: 
   purchaseValidationMessage: 
   startDragReceiver: {fileID: 0}
---- !u!114 &1056680037703521133
+--- !u!114 &6681332372978619925
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -112,16 +112,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.53773576, g: 0.2645823, b: 0.053266257, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: df67f06a5e3884d48972ff804c622562, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f968b5a208babbb44a002fdcfd12c0d1, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
