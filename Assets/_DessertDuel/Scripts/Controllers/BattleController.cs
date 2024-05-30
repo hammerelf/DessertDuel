@@ -1,8 +1,12 @@
 //Created by: Ryan King
 
+//TODO: Create battle scene. Visualize attacks per second on battle scene with UI text. Then continue refining attacks per second function.
+
 using HammerElf.Tools.Utilities;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace HammerElf.Games.DessertDuel
 {
@@ -16,12 +20,20 @@ namespace HammerElf.Games.DessertDuel
         private List<OffensePlaceable> offenseOptions;
 
         private Lane[] playerLanes = new Lane[3], opponentLanes = new Lane[3];
-        private List<EnemyUnit> playerEnemies = new List<EnemyUnit>(), opponentEnemies = new List<EnemyUnit>();
+        private List<EnemyUnit> playerEnemies = new(), opponentEnemies = new();
         private PlayerState playerState;
 
+        [SerializeField]
+        private int battleDelay = 5;
         public int laneDistance = 10;
         private float timeTracking;
         private bool isPlayerLost;
+
+        [SerializeField]
+        private GameObject[] playerLaneEnemyHolders = new GameObject[3], 
+                             opponentLaneEnemyHolders = new GameObject[3];
+        [SerializeField]
+        private GameObject enemyVisualizer;
 
         protected override void Awake()
         {
@@ -37,14 +49,30 @@ namespace HammerElf.Games.DessertDuel
 
             for(int i = 0; i < playerLanes.Length; i++)
             {
-                if (playerLanes[i].offenseSlot1 != null) opponentEnemies.Add(new (playerLanes[i].offenseSlot1, i));
+                if (playerLanes[i].offenseSlot1 != null) opponentEnemies.Add(new(playerLanes[i].offenseSlot1, i));
                 if (playerLanes[i].offenseSlot2 != null) opponentEnemies.Add(new(playerLanes[i].offenseSlot2, i));
                 if (playerLanes[i].offenseSlot3 != null) opponentEnemies.Add(new(playerLanes[i].offenseSlot3, i));
             }
 
+            for (int i = 0; i < opponentLanes.Length; i++)
+            {
+                if (opponentLanes[i].offenseSlot1 != null)
+                {
+                    playerEnemies.Add(new(opponentLanes[i].offenseSlot1, i));
+                    GameObject.Instantiate(enemyVisualizer);
+                }
+                if (opponentLanes[i].offenseSlot2 != null) playerEnemies.Add(new(opponentLanes[i].offenseSlot2, i));
+                if (opponentLanes[i].offenseSlot3 != null) playerEnemies.Add(new(opponentLanes[i].offenseSlot3, i));
+            }
+
+            foreach(EnemyUnit enemy in playerEnemies)
+            {
+
+            }
+
             //This will actually need to be called when battle starts instead of here. This is what
             //makes calculations occur once per second for attackers.
-            InvokeRepeating("CalculateAttackersPerSecond", 1, 1);
+            InvokeRepeating("CalculateAttackersPerSecond", battleDelay, 1);
         }
 
         //Temporary function to fill in for opponents. Will fill opponent lane with one defender each
