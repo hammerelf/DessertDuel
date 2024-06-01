@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2613981535176435683}
   - component: {fileID: 6000321125738206298}
+  - component: {fileID: 8328745306365012022}
+  - component: {fileID: 1952966784812631777}
   m_Layer: 5
   m_Name: AttackVisualizer
   m_TagString: Untagged
@@ -90,6 +92,46 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8328745306365012022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13754377386953955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 342fff1bdc8daee48952f98ad6d58967, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 
+  itemName: 
+  cost: 0
+  power: 0
+  description: 
+  state: 0
+  itemImage: {fileID: 0}
+  itemImagePath: 
+  health: 0
+  moveSpeed: 0
+  spawnRate: 0
+--- !u!114 &1952966784812631777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13754377386953955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0249106f700e528439021b4562c0bf93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 0
+  health: 0
+  healthLabel: {fileID: 6336487232487522251}
+  distanceSlider: {fileID: 6000321125738206298}
+  laneNumber: 0
 --- !u!1 &259187464605475431
 GameObject:
   m_ObjectHideFlags: 0

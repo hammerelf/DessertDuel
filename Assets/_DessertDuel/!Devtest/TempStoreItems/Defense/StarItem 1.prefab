@@ -60,7 +60,7 @@ MonoBehaviour:
   state: 0
   itemImage: {fileID: 6736010378012281123}
   itemImagePath: testPath
-  health: 1
+  health: 15
   damage: 1
   attackRate: 1
 --- !u!114 &3294265825821247965

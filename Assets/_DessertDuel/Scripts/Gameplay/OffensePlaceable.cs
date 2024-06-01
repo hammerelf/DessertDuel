@@ -3,6 +3,7 @@
 using HammerElf.Tools.Utilities;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace HammerElf.Games.DessertDuel
 {
@@ -26,6 +27,35 @@ namespace HammerElf.Games.DessertDuel
         public OffensePlaceableJSON ToJSON()
         {
             return new OffensePlaceableJSON(id, itemName, cost, power, description, state, itemImagePath, health, moveSpeed, spawnRate);
+        }
+
+        public void SetAllFields(OffensePlaceable other)
+        {
+            this.health = other.health;
+            this.moveSpeed = other.moveSpeed;
+            this.spawnRate = other.spawnRate;
+            this.itemName = other.itemName;
+            this.cost = other.cost;
+            this.power = other.power;
+            this.description = other.description;
+            this.state = other.state;
+            if (other.itemImage != null) this.itemImage = other.itemImage;
+            this.itemImagePath = other.itemImagePath;
+        }
+
+        public void SetAllFields(int health, int moveSpeed, int spawnRate, string id, string itemName, int cost,
+                                 int power, string description, PlaceableState state, string itemImagePath, Image itemImage = null)
+        {
+            this.health = health;
+            this.moveSpeed = moveSpeed;
+            this.spawnRate = spawnRate;
+            this.itemName = itemName;
+            this.cost = cost;
+            this.power = power;
+            this.description = description;
+            this.state = state;
+            if(itemImage != null) this.itemImage = itemImage;
+            this.itemImagePath = itemImagePath;
         }
 
         public void SetFromJSON(OffensePlaceableJSON json)

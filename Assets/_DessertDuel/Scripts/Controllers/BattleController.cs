@@ -1,6 +1,7 @@
 //Created by: Ryan King
 
 //TODO: Create battle scene. Visualize attacks per second on battle scene with UI text. Then continue refining attacks per second function.
+//      Hookup defense unit visualizer. Need to calculate defense damage against attackers.
 
 using HammerElf.Tools.Utilities;
 using System;
@@ -14,13 +15,8 @@ namespace HammerElf.Games.DessertDuel
     //then mirror logic to figure out which side wins the battle.
     public class BattleController : Singleton<BattleController>
     {
-        [SerializeField]
-        private List<DefensePlaceable> defenseOptions;
-        [SerializeField]
-        private List<OffensePlaceable> offenseOptions;
-
         private Lane[] playerLanes = new Lane[3], opponentLanes = new Lane[3];
-        private List<EnemyUnit> playerEnemies = new(), opponentEnemies = new();
+        private List<AttackVisualizer> playerEnemies = new(), opponentEnemies = new();
         private PlayerState playerState;
 
         [SerializeField]
@@ -31,9 +27,11 @@ namespace HammerElf.Games.DessertDuel
 
         [SerializeField]
         private GameObject[] playerLaneEnemyHolders = new GameObject[3], 
-                             opponentLaneEnemyHolders = new GameObject[3];
+                             opponentLaneEnemyHolders = new GameObject[3],
+                             playerLaneDefenseHolders = new GameObject[3],
+                             opponentLaneDefenseHolders = new GameObject[3];
         [SerializeField]
-        private GameObject enemyVisualizer;
+        private GameObject enemyVisualizer, defenseVisualizer;
 
         protected override void Awake()
         {
@@ -43,31 +41,47 @@ namespace HammerElf.Games.DessertDuel
 
         private void Start()
         {
-            playerState.lanes = playerLanes;
+            //playerState.lanes = playerLanes;
 
             PopulateOpponentLanesWithRandom();
 
-            for(int i = 0; i < playerLanes.Length; i++)
-            {
-                if (playerLanes[i].offenseSlot1 != null) opponentEnemies.Add(new(playerLanes[i].offenseSlot1, i));
-                if (playerLanes[i].offenseSlot2 != null) opponentEnemies.Add(new(playerLanes[i].offenseSlot2, i));
-                if (playerLanes[i].offenseSlot3 != null) opponentEnemies.Add(new(playerLanes[i].offenseSlot3, i));
-            }
+            //TODO: Remove because temporary to test lane population
+            playerLanes = opponentLanes;
+
+            //for(int i = 0; i < playerLanes.Length; i++)
+            //{
+            //    if (playerLanes[i].offenseSlot1 != null) opponentEnemies.Add(new(playerLanes[i].offenseSlot1, i));
+            //    if (playerLanes[i].offenseSlot2 != null) opponentEnemies.Add(new(playerLanes[i].offenseSlot2, i));
+            //    if (playerLanes[i].offenseSlot3 != null) opponentEnemies.Add(new(playerLanes[i].offenseSlot3, i));
+            //}
 
             for (int i = 0; i < opponentLanes.Length; i++)
             {
-                if (opponentLanes[i].offenseSlot1 != null)
+                OffensePlaceable[] offenseSlotGetter = new OffensePlaceable[]
+                { opponentLanes[i].offenseSlot1, opponentLanes[i].offenseSlot2, opponentLanes[i].offenseSlot3 };
+
+                for(int j = 0; j < offenseSlotGetter.Length; j++)
                 {
-                    playerEnemies.Add(new(opponentLanes[i].offenseSlot1, i));
-                    GameObject.Instantiate(enemyVisualizer);
+                    if (offenseSlotGetter[j] != null)
+                    {
+                        GameObject go = GameObject.Instantiate(enemyVisualizer, playerLaneEnemyHolders[i].transform);
+                        AttackVisualizer visual = go.GetComponent<AttackVisualizer>();
+                        visual.enemyType.SetAllFields(offenseSlotGetter[j]);
+                        visual.laneNumber = j;
+                        visual.health = offenseSlotGetter[j].health;
+                        playerEnemies.Add(visual);
+                    }
                 }
-                if (opponentLanes[i].offenseSlot2 != null) playerEnemies.Add(new(opponentLanes[i].offenseSlot2, i));
-                if (opponentLanes[i].offenseSlot3 != null) playerEnemies.Add(new(opponentLanes[i].offenseSlot3, i));
             }
 
-            foreach(EnemyUnit enemy in playerEnemies)
+            for(int i = 0; i < playerLaneDefenseHolders.Length; i++)
             {
-
+                GameObject defGO = Instantiate(defenseVisualizer, playerLaneDefenseHolders[i].transform);
+                DefenseVisualizer defVisual = defGO.GetComponent<DefenseVisualizer>();
+                defVisual.defenseType.SetAllFields(GameManager.Instance.defenseOptions[Random.Range(0, GameManager.Instance.defenseOptions.Count)]);
+                playerLanes[i].defenseSlot = defVisual.defenseType;
+                defVisual.Start();
+                ConsoleLog.Log("Defense slot health: " + defVisual.defenseType.health);
             }
 
             //This will actually need to be called when battle starts instead of here. This is what
@@ -80,16 +94,23 @@ namespace HammerElf.Games.DessertDuel
         //always have at least one.
         private void PopulateOpponentLanesWithRandom()
         {
+            opponentLanes[0] = new Lane();
+            opponentLanes[1] = new Lane();
+            opponentLanes[2] = new Lane();
+
             List<OffensePlaceable> offenses = GameManager.Instance.offenseOptions;
-            foreach(Lane lane in opponentLanes)
+            for (int i = 0; i < opponentLanes.Length; i++)
             {
+                GameObject defGO = Instantiate(defenseVisualizer, opponentLaneDefenseHolders[i].transform);
+                DefenseVisualizer defVisual = defGO.GetComponent<DefenseVisualizer>();
+                defVisual.defenseType.SetAllFields(GameManager.Instance.defenseOptions[Random.Range(0, GameManager.Instance.defenseOptions.Count)]);
+                opponentLanes[i].defenseSlot = defVisual.defenseType;
+
                 int offenseLaneOdds = Random.Range(0 + GameManager.Instance.currentPlayerState.wins + 
                                                    GameManager.Instance.currentPlayerState.losses, 100);
-
-                lane.defenseSlot = GameManager.Instance.defenseOptions[Random.Range(0, GameManager.Instance.defenseOptions.Count)];
-                if(offenseLaneOdds >= 30 || opponentLanes[0] == lane) lane.offenseSlot1 = offenses[Random.Range(0,offenses.Count)];
-                if (offenseLaneOdds >= 60) lane.offenseSlot2 = offenses[Random.Range(0, offenses.Count)];
-                if (offenseLaneOdds >= 80) lane.offenseSlot3 = offenses[Random.Range(0, offenses.Count)];
+                if(offenseLaneOdds >= 30 || opponentLanes[0] == opponentLanes[i]) opponentLanes[i].offenseSlot1 = offenses[Random.Range(0,offenses.Count)];
+                if(offenseLaneOdds >= 60) opponentLanes[i].offenseSlot2 = offenses[Random.Range(0, offenses.Count)];
+                if(offenseLaneOdds >= 80) opponentLanes[i].offenseSlot3 = offenses[Random.Range(0, offenses.Count)];
             }
         }
 
@@ -100,32 +121,36 @@ namespace HammerElf.Games.DessertDuel
         //health remaining.
         private void CalculateAttackersPerSecond()
         {
-            foreach(EnemyUnit enemy in playerEnemies)
+            for(int i = 0; i < playerEnemies.Count; i++)
+            //foreach(AttackVisualizer enemy in playerEnemies)
             {
-                if(enemy.health <= 0)
+                playerEnemies[i].distance -= playerEnemies[i].enemyType.moveSpeed;
+
+                if (playerEnemies[i].health <= 0)
                 {
-                    playerEnemies.Remove(enemy);
+                    playerEnemies.Remove(playerEnemies[i]);
                     continue;
                 }
 
-                if (enemy.distance <= 0)
+                if (playerEnemies[i].distance <= 0)
                 {
-                    if (playerLanes[enemy.laneNumber].defenseSlot.health > 1)
+                    if (playerLanes[playerEnemies[i].laneNumber].defenseSlot.health > 1)
                     {
-                        enemy.distance = laneDistance;
+                        playerEnemies[i].distance = laneDistance;
+                        playerLanes[playerEnemies[i].laneNumber].defenseSlot.health -= 1;
                     }
                     else
                     {
-                        playerEnemies.Remove(enemy);
+                        playerEnemies[i].gameObject.SetActive(false);
+                        //playerEnemies.Remove(playerEnemies[i]);
                     }
-                    playerLanes[enemy.laneNumber].defenseSlot.health -= 1;
-                    continue;
+                    //continue;
                 }
 
-                enemy.distance -= enemy.enemyType.moveSpeed;
-                if (enemy.distance < 0)
+                playerEnemies[i].distance -= playerEnemies[i].enemyType.moveSpeed;
+                if (playerEnemies[i].distance < 0)
                 {
-                    enemy.distance = 0;
+                    playerEnemies[i].distance = 0;
                 }
             }
 
@@ -136,39 +161,37 @@ namespace HammerElf.Games.DessertDuel
         //Although I think I had a different idea for the losing conditions.
         private void CheckForLoss()
         {
-            bool lossCheck = false;
+            bool lossCheck = true;
             foreach(Lane lane in playerLanes)
             {
                 if(lane.defenseSlot.health > 0)
                 {
-                    lossCheck = true;
+                    lossCheck = false;
                 }
             }
-
+            if (lossCheck) ConsoleLog.Log("Player lost all defense units!");
             isPlayerLost = lossCheck;
         }
     }
 
-    class EnemyUnit
-    {
-        public OffensePlaceable enemyType;
-        public int distance;
-        public int laneNumber;
-        public int health;
+    //class EnemyUnit
+    //{
+    //    public OffensePlaceable enemyType;
+    //    public int distance = BattleController.Instance.laneDistance;
+    //    public int laneNumber;
+    //    public int health;
 
-        public EnemyUnit()
-        {
-            enemyType = null;
-            distance = BattleController.Instance.laneDistance;
-            health = enemyType != null ? enemyType.health : 0;
-        }
+    //    public EnemyUnit()
+    //    {
+    //        enemyType = null;
+    //        health = 0;
+    //    }
 
-        public EnemyUnit(OffensePlaceable offensePlaceable, int lane)
-        {
-            enemyType = offensePlaceable;
-            distance = BattleController.Instance.laneDistance;
-            laneNumber = lane;
-            health = offensePlaceable.health;
-        }
-    }
+    //    public EnemyUnit(OffensePlaceable offensePlaceable, int lane)
+    //    {
+    //        enemyType = offensePlaceable;
+    //        laneNumber = lane;
+    //        health = offensePlaceable.health;
+    //    }
+    //}
 }

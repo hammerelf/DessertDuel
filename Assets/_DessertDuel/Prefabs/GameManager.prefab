@@ -45,7 +45,125 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d8c4835969cca49a4fee6402ba10fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: currentPlayerState
+      Entry: 7
+      Data: 0|HammerElf.Games.DessertDuel.PlayerState, DessertDuel
+    - Name: money
+      Entry: 3
+      Data: 0
+    - Name: wins
+      Entry: 3
+      Data: 0
+    - Name: losses
+      Entry: 3
+      Data: 0
+    - Name: lives
+      Entry: 3
+      Data: 5
+    - Name: currentRound
+      Entry: 3
+      Data: 0
+    - Name: lanes
+      Entry: 7
+      Data: 1|HammerElf.Games.DessertDuel.Lane[], DessertDuel
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: offensePlaceables
+      Entry: 7
+      Data: 2|System.Collections.Generic.List`1[[HammerElf.Games.DessertDuel.OffensePlaceable,
+        DessertDuel]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: defensePlaceables
+      Entry: 7
+      Data: 3|System.Collections.Generic.List`1[[HammerElf.Games.DessertDuel.DefensePlaceable,
+        DessertDuel]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: offenseStore
+      Entry: 7
+      Data: 4|System.Collections.Generic.List`1[[HammerElf.Games.DessertDuel.OffensePlaceable,
+        DessertDuel]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: defenseStore
+      Entry: 7
+      Data: 5|System.Collections.Generic.List`1[[HammerElf.Games.DessertDuel.DefensePlaceable,
+        DessertDuel]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   <UseDontDestroyOnLoad>k__BackingField: 1
+  splashController: {fileID: 0}
+  storeController: {fileID: 0}
+  battleController: {fileID: 0}
+  defenseOptions:
+  - {fileID: 1358864975066330711, guid: 312365a85dc981d47abce59aba43fa1b, type: 3}
+  - {fileID: 1358864975066330711, guid: d282b9ea5cde0f44b8af17f86f847e87, type: 3}
+  - {fileID: 1358864975066330711, guid: 7f0fd9222a709e1449ba3e9728156411, type: 3}
+  - {fileID: 1358864975066330711, guid: 3205e1f35808c414e978b0fafc635176, type: 3}
+  offenseOptions:
+  - {fileID: 4436792878582544936, guid: 2b641a07e5d8c3e44b128bc6ce623108, type: 3}
+  - {fileID: -3996898404023851975, guid: 30df141345dfdcb449e1523a4d11f72d, type: 3}
+  - {fileID: -6227133537595255582, guid: 6240698e0785b714087fc2736dc629cb, type: 3}
+  - {fileID: -5725597153435352504, guid: 0b67528bda23f1e47a7fabe535d53268, type: 3}
+  - {fileID: 5359928771959366830, guid: 5670e30ac79294b45a29c81722377e5f, type: 3}
+  - {fileID: -1799168970013991823, guid: dd0a2b459ae67414c9dd086050abd93f, type: 3}
 --- !u!1001 &6562976159116019983
 PrefabInstance:
   m_ObjectHideFlags: 0
