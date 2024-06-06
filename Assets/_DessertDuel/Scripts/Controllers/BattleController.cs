@@ -1,10 +1,10 @@
 //Created by: Ryan King
 
-//TODO: Create battle scene. Visualize attacks per second on battle scene with UI text. Then continue refining attacks per second function.
-//      Hookup defense unit visualizer. Need to calculate defense damage against attackers.
+//TODO: Visualizer values are no longer updating. Continue refining attacks per second function.
 
 using HammerElf.Tools.Utilities;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -17,6 +17,7 @@ namespace HammerElf.Games.DessertDuel
     {
         private Lane[] playerLanes = new Lane[3], opponentLanes = new Lane[3];
         private List<AttackVisualizer> playerEnemies = new(), opponentEnemies = new();
+        private List<DefenseVisualizer> playerDefenders = new(), opponentDefenders = new();
         private PlayerState playerState;
 
         [SerializeField]
@@ -67,7 +68,7 @@ namespace HammerElf.Games.DessertDuel
                         GameObject go = GameObject.Instantiate(enemyVisualizer, playerLaneEnemyHolders[i].transform);
                         AttackVisualizer visual = go.GetComponent<AttackVisualizer>();
                         visual.enemyType.SetAllFields(offenseSlotGetter[j]);
-                        visual.laneNumber = j;
+                        visual.laneNumber = i;
                         visual.health = offenseSlotGetter[j].health;
                         playerEnemies.Add(visual);
                     }
@@ -79,14 +80,24 @@ namespace HammerElf.Games.DessertDuel
                 GameObject defGO = Instantiate(defenseVisualizer, playerLaneDefenseHolders[i].transform);
                 DefenseVisualizer defVisual = defGO.GetComponent<DefenseVisualizer>();
                 defVisual.defenseType.SetAllFields(GameManager.Instance.defenseOptions[Random.Range(0, GameManager.Instance.defenseOptions.Count)]);
+                //ConsoleLog.Log("Defender type image name: " + defVisual.defenseType.itemImage.sprite.name);
                 playerLanes[i].defenseSlot = defVisual.defenseType;
+                defVisual.laneNumber = i;
                 defVisual.Start();
+                //ConsoleLog.Log("Defender visualizer image name: " + defVisual.image.sprite.name);
+                playerDefenders.Add(defVisual);
                 ConsoleLog.Log("Defense slot health: " + defVisual.defenseType.health);
             }
 
             //This will actually need to be called when battle starts instead of here. This is what
             //makes calculations occur once per second for attackers.
             InvokeRepeating("CalculateAttackersPerSecond", battleDelay, 1);
+
+            //Have each defender make damage calls on repeat.
+            foreach(DefenseVisualizer defender in playerDefenders)
+            {
+                StartCoroutine(DefenderDamage(defender.defenseType.attackRate, defender.laneNumber, defender.defenseType.damage));
+            }
         }
 
         //Temporary function to fill in for opponents. Will fill opponent lane with one defender each
@@ -108,7 +119,7 @@ namespace HammerElf.Games.DessertDuel
 
                 int offenseLaneOdds = Random.Range(0 + GameManager.Instance.currentPlayerState.wins + 
                                                    GameManager.Instance.currentPlayerState.losses, 100);
-                if(offenseLaneOdds >= 30 || opponentLanes[0] == opponentLanes[i]) opponentLanes[i].offenseSlot1 = offenses[Random.Range(0,offenses.Count)];
+                if(offenseLaneOdds >= 0 || opponentLanes[0] == opponentLanes[i]) opponentLanes[i].offenseSlot1 = offenses[Random.Range(0,offenses.Count)];
                 if(offenseLaneOdds >= 60) opponentLanes[i].offenseSlot2 = offenses[Random.Range(0, offenses.Count)];
                 if(offenseLaneOdds >= 80) opponentLanes[i].offenseSlot3 = offenses[Random.Range(0, offenses.Count)];
             }
@@ -134,11 +145,16 @@ namespace HammerElf.Games.DessertDuel
 
                 if (playerEnemies[i].distance <= 0)
                 {
-                    if (playerLanes[playerEnemies[i].laneNumber].defenseSlot.health > 1)
+                    if (playerEnemies[i].health > 1)
                     {
                         playerEnemies[i].distance = laneDistance;
-                        playerLanes[playerEnemies[i].laneNumber].defenseSlot.health -= 1;
+                        playerDefenders[playerEnemies[i].laneNumber].health -= 1;
                     }
+                    //if (playerLanes[playerEnemies[i].laneNumber].defenseSlot.health > 1)
+                    //{
+                    //    playerEnemies[i].distance = laneDistance;
+                    //    playerLanes[playerEnemies[i].laneNumber].defenseSlot.health -= 1;
+                    //}
                     else
                     {
                         playerEnemies[i].gameObject.SetActive(false);
@@ -171,6 +187,24 @@ namespace HammerElf.Games.DessertDuel
             }
             if (lossCheck) ConsoleLog.Log("Player lost all defense units!");
             isPlayerLost = lossCheck;
+        }
+
+        private IEnumerator DefenderDamage(int rate, int lane, int damage)
+        {
+            yield return new WaitForSeconds(battleDelay);
+
+            do
+            {
+                foreach (AttackVisualizer visual in playerEnemies)
+                {
+                    if (visual.laneNumber.Equals(lane))
+                    {
+                        visual.health -= damage;
+                    }
+                }
+
+                yield return new WaitForSeconds(rate);
+            } while (!isPlayerLost);
         }
     }
 

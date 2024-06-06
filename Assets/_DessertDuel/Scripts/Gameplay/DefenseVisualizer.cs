@@ -9,7 +9,7 @@ namespace HammerElf.Games.DessertDuel
     [RequireComponent(typeof(DefensePlaceable))]
     public class DefenseVisualizer : MonoBehaviour
     {
-        public int health, startHealth;
+        public int health, startHealth, laneNumber;
         public Image image;
         [HideInInspector]
         public DefensePlaceable defenseType;

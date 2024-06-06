@@ -9,9 +9,7 @@ namespace HammerElf.Games.DessertDuel
     [RequireComponent(typeof(OffensePlaceable))]
     public class AttackVisualizer : MonoBehaviour
     {
-        public int distance;
-        public int health;
-        public int laneNumber;
+        public int distance, health, laneNumber;
         [HideInInspector]
         public OffensePlaceable enemyType;
 

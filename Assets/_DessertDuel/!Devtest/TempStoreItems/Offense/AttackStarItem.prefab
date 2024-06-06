@@ -60,7 +60,7 @@ MonoBehaviour:
   state: 0
   itemImage: {fileID: 6736010378012281123}
   itemImagePath: 
-  health: 1
+  health: 100
   moveSpeed: 1
   spawnRate: 1
 --- !u!114 &3294265825821247965
