@@ -25,14 +25,14 @@ namespace HammerElf.Games.DessertDuel
         {
             startHealth = defenseType.health;
             health = defenseType.health;
-            healthStartVisualizer.text = startHealth.ToString();
-            image = defenseType.itemImage;
+            healthStartVisualizer.SetText(startHealth.ToString());
+            image.sprite = defenseType.itemImage.sprite;
+            image.color = defenseType.itemImage.color;
         }
 
         private void Update()
         {
-            health = defenseType.health;
-            healthVisualizer.text = health.ToString();
+            healthVisualizer.SetText(health.ToString());
         }
     }
 }

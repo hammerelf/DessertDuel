@@ -59,6 +59,7 @@ MonoBehaviour:
   enemyType: {fileID: 0}
   healthLabel: {fileID: 6336487232487522251}
   distanceSlider: {fileID: 6000321125738206298}
+  image: {fileID: 781787228385396550}
 --- !u!114 &8328745306365012022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,8 +319,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: 20}
+  m_AnchoredPosition: {x: 0, y: -15.1744}
+  m_SizeDelta: {x: 20, y: 10.3289}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &270098825489816439
 CanvasRenderer:

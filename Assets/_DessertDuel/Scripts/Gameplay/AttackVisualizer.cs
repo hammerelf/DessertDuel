@@ -15,7 +15,7 @@ namespace HammerElf.Games.DessertDuel
 
         public TextMeshProUGUI healthLabel;
         public Slider distanceSlider;
-
+        public Image image;
 
         private void Awake()
         {
@@ -26,11 +26,13 @@ namespace HammerElf.Games.DessertDuel
         {
             distance = BattleController.Instance.laneDistance;
             distanceSlider.maxValue = distance;
+            image.sprite = enemyType.itemImage.sprite;
+            image.color = enemyType.itemImage.color;
         }
 
         private void Update()
         {
-            healthLabel.text = enemyType.health.ToString();
+            healthLabel.SetText(health.ToString());
             distanceSlider.value = distance;
         }
 
@@ -39,6 +41,8 @@ namespace HammerElf.Games.DessertDuel
             enemyType = offensePlaceable;
             laneNumber = lane;
             health = offensePlaceable.health;
+            image.sprite = offensePlaceable.itemImage.sprite;
+            image.color = offensePlaceable.itemImage.color;
         }
     }
 }
