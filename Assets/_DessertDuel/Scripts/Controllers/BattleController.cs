@@ -7,9 +7,12 @@
 //      Add system for respawning attackers with increasingly reduced times until defenders die.
 
 using HammerElf.Tools.Utilities;
+using Newtonsoft.Json;
+using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -20,7 +23,7 @@ namespace HammerElf.Games.DessertDuel
     //then mirror logic to figure out which side wins the battle.
     public class BattleController : Singleton<BattleController>
     {
-        private Lane[] playerLanes = new Lane[3], opponentLanes = new Lane[3];
+        private Lane[] opponentLanes = new Lane[3];
         private List<AttackVisualizer> playerEnemies = new(), opponentEnemies = new();
         private List<DefenseVisualizer> playerDefenders = new(), opponentDefenders = new();
         private PlayerState playerState;
@@ -50,7 +53,7 @@ namespace HammerElf.Games.DessertDuel
             PopulateOpponentLanesWithRandom();
 
             //TODO: Remove because temporary to test lane population
-            playerLanes = opponentLanes;
+            //playerLanes = opponentLanes;
 
             for (int i = 0; i < opponentLanes.Length; i++)
             {
@@ -75,12 +78,21 @@ namespace HammerElf.Games.DessertDuel
                 }
             }
 
+            //TODO: move this logic to populate player later.
+            List<string> stateDefs = new List<string>()
+            {
+                GameManager.Instance.jPlayerState.defensePlacement1,
+                GameManager.Instance.jPlayerState.defensePlacement2,
+                GameManager.Instance.jPlayerState.defensePlacement3
+            };
             for(int i = 0; i < playerLaneDefenseHolders.Length; i++)
             {
+                if (stateDefs[i].Equals("")) continue;
                 GameObject defGO = Instantiate(defenseVisualizer, playerLaneDefenseHolders[i].transform);
                 DefenseVisualizer defVisual = defGO.GetComponent<DefenseVisualizer>();
-                defVisual.defenseType.SetAllFields(GameManager.Instance.defenseOptions[Random.Range(0, GameManager.Instance.defenseOptions.Count)]);
-                playerLanes[i].defenseSlot = defVisual.defenseType;
+                //For random starting defense units
+                //defVisual.defenseType.SetAllFields(GameManager.Instance.defenseOptions[Random.Range(0, GameManager.Instance.defenseOptions.Count)]);
+                defVisual.defenseType.LoadFromId(stateDefs[i]);
                 defVisual.laneNumber = i;
                 defVisual.Start();
                 playerDefenders.Add(defVisual);
@@ -95,6 +107,20 @@ namespace HammerElf.Games.DessertDuel
             {
                 StartCoroutine(DefenderDamage(defender.defenseType.attackRate, defender.laneNumber, defender.defenseType.damage));
             }
+        }
+
+        //Pull player state from json file, populate each defense and offense slot based on id
+        //from player state. Will generate prefab from json data based on id unless prefab already
+        //exists.
+        [Button]
+        private void PopulatePlayer()
+        {
+            string path = GameManager.Instance.jsonOutputFolderPath + "PlayerState.json";
+            string contents = File.ReadAllText(path);
+            JsonPlayerState loadedPlayerState = JsonConvert.DeserializeObject<JsonPlayerState>(contents);
+            GameManager.Instance.jPlayerState = loadedPlayerState;
+            ConsoleLog.Log("Player state money: " + loadedPlayerState.money);
+            ConsoleLog.Log("Id from path: " + path.Substring(path.LastIndexOf('/') + 1, path.LastIndexOf('.') - path.LastIndexOf('/')));
         }
 
         //Temporary function to fill in for opponents. Will fill opponent lane with one defender each

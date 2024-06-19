@@ -26,8 +26,11 @@ namespace HammerElf.Games.DessertDuel
             startHealth = defenseType.health;
             health = defenseType.health;
             healthStartVisualizer.SetText(startHealth.ToString());
-            image.sprite = defenseType.itemImage.sprite;
-            image.color = defenseType.itemImage.color;
+            if (defenseType.itemImage != null)
+            {
+                image.sprite = defenseType.itemImage.sprite;
+                image.color = defenseType.itemImage.color;
+            }
         }
 
         private void Update()

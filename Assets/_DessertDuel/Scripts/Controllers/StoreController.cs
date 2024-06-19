@@ -27,6 +27,13 @@ namespace HammerElf.Games.DessertDuel
         [SerializeField]
         private int rerollCost = 1;
 
+        [SerializeField]
+        private DragReceiver defenseSlot1, defenseSlot2, defenseSlot3;
+        [SerializeField]
+        private List<DragReceiver> offenseSlots1 = new(3), offenseSlots2 = new(3), offenseSlots3 = new(3);
+        [SerializeField]
+        private List<DragReceiver> offenseStorage, defenseStorage;
+
         protected override void Awake()
         {
             base.Awake();
@@ -91,6 +98,101 @@ namespace HammerElf.Games.DessertDuel
                 //Not enough money feedback will go here.
                 ConsoleLog.Log("Not enough money to reroll.");
             }
+        }
+
+        //Saves currently placed items to json so that they can be accessed later or in a
+        //different scene. Must iterate through each defense and offense placement and
+        //save the id which can then be looked up later to place items again.
+        public void SaveStoreState()
+        {
+            JsonPlayerState placementHolder = GameManager.Instance.jPlayerState;
+
+            //TODO: Fix null ref that I temporarily fixed here with band-aid logic.
+            if (placementHolder.offensePlacements1 == null)
+            {
+                ConsoleLog.Log("Band-aid for offencsePlacements1");
+                placementHolder.offensePlacements1 = new string[3];
+            }
+            if (placementHolder.offensePlacements2 == null)
+            {
+                ConsoleLog.Log("Band-aid for offencsePlacements2");
+                placementHolder.offensePlacements2 = new string[3];
+            }
+            if (placementHolder.offensePlacements3 == null)
+            {
+                ConsoleLog.Log("Band-aid for offencsePlacements3");
+                placementHolder.offensePlacements3 = new string[3];
+            }
+            if (placementHolder.offenseStore == null)
+            {
+                ConsoleLog.Log("Band-aid for offenseStore");
+                placementHolder.offenseStore = new();
+            }
+            if (placementHolder.defenseStore == null)
+            {
+                ConsoleLog.Log("Band-aid for defenseStore");
+                placementHolder.defenseStore = new();
+            }
+            if(placementHolder.offenseStorage == null)
+            {
+                ConsoleLog.Log("Band-aid for offenseStorage");
+                placementHolder.offenseStorage = new();
+            }
+            if( placementHolder.defenseStorage == null)
+            {
+                ConsoleLog.Log("Band-aid for defenseStorage");
+                placementHolder.defenseStorage = new();
+            }
+
+
+            placementHolder.defensePlacement1 = defenseSlot1.assignedDraggable != null ? defenseSlot1.assignedDraggable.id : "";
+            placementHolder.defensePlacement2 = defenseSlot2.assignedDraggable != null ? defenseSlot2.assignedDraggable.id : "";
+            placementHolder.defensePlacement3 = defenseSlot3.assignedDraggable != null ? defenseSlot3.assignedDraggable.id : "";
+
+            for (int i = 0; i < 3; i++)
+            {
+                placementHolder.offensePlacements1[i] = offenseSlots1[i].assignedDraggable != null ? offenseSlots1[i].assignedDraggable.id : "";
+                placementHolder.offensePlacements2[i] = offenseSlots2[i].assignedDraggable != null ? offenseSlots2[i].assignedDraggable.id : "";
+                placementHolder.offensePlacements3[i] = offenseSlots3[i].assignedDraggable != null ? offenseSlots3[i].assignedDraggable.id : "";
+            }
+
+            placementHolder.offenseStore.Clear();
+            foreach (DragReceiver oStoreSlot in offenseStoreSlots)
+            {
+                if (oStoreSlot.assignedDraggable != null)
+                {
+                    placementHolder.offenseStore.Add(oStoreSlot.assignedDraggable.id);
+                }
+            }
+
+            placementHolder.defenseStore.Clear();
+            foreach (DragReceiver dStoreSlot in defenseStoreSlots)
+            {
+                if (dStoreSlot.assignedDraggable != null)
+                {
+                    placementHolder.defenseStore.Add(dStoreSlot.assignedDraggable.id);
+                }
+            }
+
+            placementHolder.offenseStorage.Clear();
+            foreach(DragReceiver oStorageSlot in offenseStorage)
+            {
+                if(oStorageSlot.assignedDraggable != null)
+                {
+                    placementHolder.offenseStorage.Add(oStorageSlot.assignedDraggable.id);
+                }    
+            }
+
+            placementHolder.defenseStorage.Clear();
+            foreach(DragReceiver dStorageSlot in defenseStorage)
+            {
+                if(dStorageSlot.assignedDraggable != null)
+                {
+                    placementHolder.defenseStorage.Add(dStorageSlot.assignedDraggable.id);
+                }
+            }
+
+            placementHolder.SaveJson(placementHolder.PlayerStateToJson());
         }
     }
 }

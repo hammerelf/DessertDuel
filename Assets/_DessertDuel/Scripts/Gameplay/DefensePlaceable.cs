@@ -1,7 +1,9 @@
 //Created by: Ryan King
 
 using HammerElf.Tools.Utilities;
+using Newtonsoft.Json;
 using Sirenix.OdinInspector;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -60,7 +62,7 @@ namespace HammerElf.Games.DessertDuel
 
         public void SetFromJSON(DefensePlaceableJSON json)
         {
-            if(json == null)
+            if (json == null)
             {
                 ConsoleLog.LogWarning("Deserialized json object is null.");
                 return;
@@ -76,6 +78,23 @@ namespace HammerElf.Games.DessertDuel
             health = json.health;
             damage = json.damage;
             attackRate = json.attackRate;
+        }
+
+        public void LoadFromId(string id)
+        {
+            string path = GameManager.Instance.jsonOutputFolderPath + "DP_" + id + ".json";
+            string data = "";
+            if (File.Exists(path))
+            {
+                data = File.ReadAllText(path);
+            }
+            if (data.Equals(""))
+            {
+                ConsoleLog.LogWarning("File not found for id: " + id);
+                return;
+            }
+
+            SetFromJSON(JsonConvert.DeserializeObject<DefensePlaceableJSON>(data));
         }
     }
 

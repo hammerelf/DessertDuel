@@ -49,15 +49,15 @@ namespace HammerElf.Editor.DessertDuel
         //    return deserializedObject;
         //}
 
-        public Placeable ConvertJSONToPlaceable(string json)
-        {
-            if (json == null || json.Equals(""))
-            {
-                ConsoleLog.LogError("Json data is empty or null.");
-                return null;
-            }
-            return new Placeable();
-        }
+        //public Placeable ConvertJSONToPlaceable(string json)
+        //{
+        //    if (json == null || json.Equals(""))
+        //    {
+        //        ConsoleLog.LogError("Json data is empty or null.");
+        //        return null;
+        //    }
+        //    return new Placeable();
+        //}
 
         //Takes in a json file and creates either a DefensePlaceable or OffensePlaceable depending
         //on the isDefense bool in the file. Then sets the values of that prefab to the values from
@@ -85,8 +85,6 @@ namespace HammerElf.Editor.DessertDuel
 
             if(isDef)
             {
-
-
                 PlaceableJSON pJson = new DefensePlaceableJSON(deserializedObject.id.Value,
                                                                deserializedObject.itemName.Value,
                                                                (int)deserializedObject.cost.Value,
@@ -123,14 +121,20 @@ namespace HammerElf.Editor.DessertDuel
             }
 
             string jsonData;
+            string path = jsonOutputFolderPath + "Unnamed" + ".json";
+            string type = "";
 
             if (deserializedObject.GetType() == typeof(DefensePlaceable))
             {
                 jsonData = JsonConvert.SerializeObject((deserializedObject as DefensePlaceable).ToJSON());
+                path = jsonOutputFolderPath + "DP_" + deserializedObject.id + ".json";
+                type = "defense ";
             }
             else if (deserializedObject.GetType() == typeof(OffensePlaceable))
             {
                 jsonData = JsonConvert.SerializeObject((deserializedObject as OffensePlaceable).ToJSON());
+                path = jsonOutputFolderPath + "OP_" + deserializedObject.id + ".json";
+                type = "offense ";
             }
             else
             {
@@ -138,10 +142,15 @@ namespace HammerElf.Editor.DessertDuel
                 return;
             }
 
-            string path = jsonOutputFolderPath + deserializedObject.name + ".json";
             path = AssetDatabase.GenerateUniqueAssetPath(path);
             File.WriteAllText(path, jsonData);
             AssetDatabase.Refresh();
+            ConsoleLog.Log("Json " + type + "data for id \"" + deserializedObject.id + "\" created at path: " + path);
+        }
+
+        public static string GetIdFromFileName(string fileName)
+        {
+            return fileName.Substring(fileName.LastIndexOf('_') + 1, fileName.LastIndexOf('.') - fileName.LastIndexOf('_'));
         }
     }
 }
