@@ -107,44 +107,6 @@ namespace HammerElf.Games.DessertDuel
         {
             JsonPlayerState placementHolder = GameManager.Instance.jPlayerState;
 
-            //TODO: Fix null ref that I temporarily fixed here with band-aid logic.
-            if (placementHolder.offensePlacements1 == null)
-            {
-                ConsoleLog.Log("Band-aid for offencsePlacements1");
-                placementHolder.offensePlacements1 = new string[3];
-            }
-            if (placementHolder.offensePlacements2 == null)
-            {
-                ConsoleLog.Log("Band-aid for offencsePlacements2");
-                placementHolder.offensePlacements2 = new string[3];
-            }
-            if (placementHolder.offensePlacements3 == null)
-            {
-                ConsoleLog.Log("Band-aid for offencsePlacements3");
-                placementHolder.offensePlacements3 = new string[3];
-            }
-            if (placementHolder.offenseStore == null)
-            {
-                ConsoleLog.Log("Band-aid for offenseStore");
-                placementHolder.offenseStore = new();
-            }
-            if (placementHolder.defenseStore == null)
-            {
-                ConsoleLog.Log("Band-aid for defenseStore");
-                placementHolder.defenseStore = new();
-            }
-            if(placementHolder.offenseStorage == null)
-            {
-                ConsoleLog.Log("Band-aid for offenseStorage");
-                placementHolder.offenseStorage = new();
-            }
-            if( placementHolder.defenseStorage == null)
-            {
-                ConsoleLog.Log("Band-aid for defenseStorage");
-                placementHolder.defenseStorage = new();
-            }
-
-
             placementHolder.defensePlacement1 = defenseSlot1.assignedDraggable != null ? defenseSlot1.assignedDraggable.id : "";
             placementHolder.defensePlacement2 = defenseSlot2.assignedDraggable != null ? defenseSlot2.assignedDraggable.id : "";
             placementHolder.defensePlacement3 = defenseSlot3.assignedDraggable != null ? defenseSlot3.assignedDraggable.id : "";

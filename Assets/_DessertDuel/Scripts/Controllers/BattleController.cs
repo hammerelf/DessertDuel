@@ -52,9 +52,6 @@ namespace HammerElf.Games.DessertDuel
         {
             PopulateOpponentLanesWithRandom();
 
-            //TODO: Remove because temporary to test lane population
-            //playerLanes = opponentLanes;
-
             for (int i = 0; i < opponentLanes.Length; i++)
             {
                 OffensePlaceable[] offenseSlotGetter = new OffensePlaceable[]
@@ -78,7 +75,7 @@ namespace HammerElf.Games.DessertDuel
                 }
             }
 
-            //TODO: move this logic to populate player later.
+            //TODO: move this logic which populates the defense units for the player to populate player later.
             List<string> stateDefs = new List<string>()
             {
                 GameManager.Instance.jPlayerState.defensePlacement1,
@@ -96,6 +93,18 @@ namespace HammerElf.Games.DessertDuel
                 defVisual.laneNumber = i;
                 defVisual.Start();
                 playerDefenders.Add(defVisual);
+            }
+            //Logic for populating the offense units for the player's opponent
+            List<string[]> stateOffs = new List<string[]>()
+            {
+                GameManager.Instance.jPlayerState.offensePlacements1,
+                GameManager.Instance.jPlayerState.offensePlacements2,
+                GameManager.Instance.jPlayerState.offensePlacements3
+            };
+            for(int i = 0; i < 3; i++)
+            {
+                if(GameManager.Instance.jPlayerState.offensePlacements1[i].Equals("")) continue;
+                GameObject offGO = Instantiate(enemyVisualizer, playerLaneEnemyHolders[0].transform);
             }
 
             //This will actually need to be called when battle starts instead of here. This is what
